@@ -30,7 +30,8 @@ CoOS::Thread Thread3( (uint32_t)&Task3, 256, 0);
 
 void SystemClock_Config(void);
 
-void HAL_SYSTICK_Callback(void)
+
+extern "C" void SysTick_Handler(void)
 {
    CoOS::ISR_SignalTest();
    Thread1.m_Flags.Set(SIGNAL_SYSTICK);
@@ -52,9 +53,9 @@ void Task1(void)
    while(1)
    {
       i += 10;
-      //CoOS::WaitForSignal(SIGNAL_SYSTICK);
+      CoOS::WaitForSignal(SIGNAL_SYSTICK);
       CoOS::Yield();
-      //CoOS::ClearSignal(SIGNAL_SYSTICK);
+      CoOS::ClearSignal(SIGNAL_SYSTICK);
    }
 }
 
@@ -83,10 +84,13 @@ void Task3(void)
 
 int main(void)
 {
+  // SysTick_Config(16000);
+  // NVIC_EnableIRQ(SysTick_IRQn);
+
    CoOS::RoundRobin::AddThread(&Thread0);
-   CoOS::RoundRobin::AddThread(&Thread1);
-   CoOS::RoundRobin::AddThread(&Thread2);
-   CoOS::RoundRobin::AddThread(&Thread3);
+   //CoOS::RoundRobin::AddThread(&Thread1);
+   //CoOS::RoundRobin::AddThread(&Thread2);
+   //CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();
    CoOS_InitProcessStack();

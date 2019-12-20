@@ -20,8 +20,8 @@ Purpose     : RTOS plugin header
 #ifdef WIN32
   #define WIN32_LEAN_AND_MEAN
   #include <windows.h>
-  #define snprintf(buf, len, format, ...) _snprintf_s(buf, len, len, format, __VA_ARGS__)
-  #define strncpy(dst, src, len)           strcpy_s(dst, len, src)
+  //#define snprintf(buf, len, format, ...) _snprintf_s(buf, len, len, format, __VA_ARGS__)
+  //#define strncpy(dst, src, len)           strcpy_s(dst, len, src)
 #else
   #include <string.h>
 #endif

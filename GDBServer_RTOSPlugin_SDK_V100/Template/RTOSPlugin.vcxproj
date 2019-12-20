@@ -116,12 +116,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Src\RTOSPlugin.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Src\JLINKARM_Const.h" />
     <ClInclude Include="Src\RTOSPlugin.h" />
     <ClInclude Include="Src\TYPES.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\RTOSPlugin.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

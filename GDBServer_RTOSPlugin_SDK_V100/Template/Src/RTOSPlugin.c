@@ -279,15 +279,18 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: %d\n", threadid);
 
 	if (threadid == _OS.CurrentThread) {
+		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, %d = %d\n", threadid, _OS.CurrentThread);
 		return -1; // Current thread or current execution returns CPU registers
 	}
 
 	//
 	// load stack memory if necessary
 	//
-	if (_StackMem.ThreadID != threadid) {
+	//if (_StackMem.ThreadID != threadid) 
+	{
 		retval = _ReadStack(threadid);
 		if (retval != 0) {
+			_pAPI->pfLogOutf("<< RTOS_GetThreadRegList Failed\n");
 			return retval;
 		}
 	}
@@ -318,18 +321,20 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 
 	}
 
-	_pAPI->pfLogOutf("<< RTOS_GetThreadRegList\n", threadid);
+	_pAPI->pfLogOutf("<< RTOS_GetThreadRegList\n");
 
 
   return 0;
 }
 
 EXPORT int RTOS_SetThreadReg(char* pHexRegVal, U32 RegIndex, U32 threadid) {
-  return -1;
+	_pAPI->pfLogOutf("<< RTOS_SetThreadReg\n");
+  return 0;
 }
 
 EXPORT int RTOS_SetThreadRegList(char *pHexRegList, U32 threadid) {
-  return -1;
+	_pAPI->pfLogOutf("<< RTOS_SetThreadRegList\n");
+  return 0;
 }
 
 

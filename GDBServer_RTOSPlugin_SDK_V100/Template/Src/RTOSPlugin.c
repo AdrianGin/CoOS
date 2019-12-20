@@ -66,6 +66,7 @@ static RTOS_SYMBOLS RTOS_Symbols[] = {
   { "pool",								0, 0 },
   { "_currentTask",              0, 0 },
   { "_nextTask",                 0, 0 },
+  { "_isRunning",   0, 0 },
   { "CoOS::RoundRobin::count",   0, 0 },
   { NULL, 0, 0 }
 };
@@ -74,6 +75,7 @@ enum RTOS_Symbol_Values {
 	pool = 0,
 	_currentTask,
 	_nextTask,
+	_isRunning,
 	eThreadCount,
 };
 
@@ -139,6 +141,7 @@ static struct {
 	STACKING			  StackingInfo;
 	U32              CurrentThread;
 	U32              ThreadCount;
+	U8					  IsActive;
 	U32              uThreadDetails;
 	THREAD_DETAIL* pThreadDetails;
 } _OS;
@@ -166,10 +169,10 @@ EXPORT int RTOS_Init(const GDB_API *pAPI, U32 core) {
 		|| (core == JLINK_CORE_CORTEX_M4)
 		|| (core == JLINK_CORE_CORTEX_M7)
 		) {
-		_OS.ThreadCount = 1;
+		_OS.ThreadCount = 0;
 		_OS.StackingInfo.RegisterOffsets = _CortexM0StackOffsets;
 		_OS.StackingInfo.RegisterCount = 23;
-
+		_OS.IsActive = 0;
 		_pAPI->pfLogOutf(" << RTOS_Init\n");
 
 		return 1;
@@ -244,9 +247,9 @@ static int _ReadStack(U32 threadid) {
 EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 
 	U32 retval;
-	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: %d\n", threadid);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Thread[%d] Reg[%d]\n", threadid, RegIndex);
 
-	if (threadid == 0 || threadid == _OS.CurrentThread) {
+	if ( threadid == _OS.CurrentThread) {
 		return -1; // Current thread or current execution returns CPU registers
 	}
 	else {
@@ -275,7 +278,7 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: %d\n", threadid);
 
-	if (threadid == 0 || threadid == _OS.CurrentThread) {
+	if (threadid == _OS.CurrentThread) {
 		return -1; // Current thread or current execution returns CPU registers
 	}
 
@@ -305,8 +308,13 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 			}
 		}
 
-		uint32_t* data = &_StackMem.Data[_OS.StackingInfo.RegisterOffsets[i].offset];
-		_pAPI->pfLogOutf("Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[i].regName, *data);
+		if (_OS.StackingInfo.RegisterOffsets[i].offset > 0) {
+			uint32_t* data = &_StackMem.Data[_OS.StackingInfo.RegisterOffsets[i].offset];
+			_pAPI->pfLogOutf("Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[i].regName, *data);
+		} else if (_OS.StackingInfo.RegisterOffsets[i].offset == -2) {
+			_pAPI->pfLogOutf("Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[i].regName, _StackMem.Pointer);
+		} 
+
 
 	}
 
@@ -397,8 +405,13 @@ EXPORT int RTOS_UpdateThreads() {
 	}
 
 	//Get Thread Count
+	retval = _pAPI->pfReadU8(RTOS_Symbols[_isRunning].address, &_OS.IsActive);
+	if ( !_OS.IsActive ) {
+		return 0;
+	}
+
 	retval = _pAPI->pfReadU32(RTOS_Symbols[eThreadCount].address, &_OS.ThreadCount);
-	_OS.ThreadCount += 1;
+
 	if (retval != 0) {
 		_pAPI->pfLogOutf("Error reading thread count.\n");
 		return retval;

@@ -5,7 +5,7 @@
 
 .global _currentTask
 .global _nextTask
-
+.global _isRunning
 
 
 .global pool
@@ -119,6 +119,11 @@ CoOS_InitProcessStack:
 	movs r1, #2
 	orrs r0, r0, r1
 	msr control, r0
+
+	movs r1, #1
+	ldr r0, =[_isRunning]
+	strb r1, [r0]
+
 	isb
 	bx lr
 

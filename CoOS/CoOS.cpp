@@ -13,7 +13,9 @@ extern "C" {
 
 volatile uint32_t _currentTask;
 volatile uint32_t _nextTask;
+volatile uint8_t  _isRunning = 0;
 CoOS::Thread* pool[NUM_THREADS];
+
 
 void SVC_Handler_C(uint32_t* svc_args)
 {

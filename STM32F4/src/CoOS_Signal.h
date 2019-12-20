@@ -9,7 +9,7 @@
 #define SRC_COOS_COOS_SIGNAL_H_
 
 #include "CoOS_Conf.h"
-#include "core_cm0.h"
+
 
 namespace CoOS {
 
@@ -21,15 +21,21 @@ public:
    SignalFlags() : state(0) {}
 
    inline void Set(Flags mask) {
-	   state |= mask;
+      do {
+         __LDREXW(&state);
+      } while( __STREXW( state | mask, &state) );
    }
 
    inline void Clear(Flags mask) {
-	   state &= ~mask;
+      do {
+         __LDREXW(&state);
+      } while( __STREXW( (state & (~mask)) , &state) );
    }
 
    inline Flags Get() {
-      return state;
+      Flags ret = __LDREXW(&state);
+      __CLREX();
+      return ret;
    }
 
    inline void Reset() {

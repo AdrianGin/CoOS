@@ -5,7 +5,7 @@
  *      Author: AdrianDesk
  */
 
-#include "CoOS/CoOS_Signal.h"
+#include <CoOS_Signal.h>
 
 namespace CoOS
 {

@@ -7,11 +7,13 @@
 
 #include <CoOS/CoOS_Thread.h>
 
+#include <new>
+
 namespace CoOS {
 
 
 Thread::Thread(uint32_t start, uint32_t stackSize, SignalFlags::Flags initialWait, bool isMaster) : m_waitMask(initialWait)   {
-   m_stack = (uint32_t*)new uint8_t[stackSize];
+   m_stack = (uint32_t*)new (std::nothrow) uint8_t[stackSize];
 
    memset(m_stack, 0, stackSize);
 

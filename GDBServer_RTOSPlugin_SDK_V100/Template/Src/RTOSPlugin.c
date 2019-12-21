@@ -17,9 +17,7 @@ Additional information:
 
 ---------------------------END-OF-HEADER------------------------------
 */
-#if _MSC_VER>=1900
-#define STDC99
-#endif
+
 
 #include "RTOSPlugin.h"
 #include "JLINKARM_Const.h"
@@ -112,6 +110,32 @@ static const STACK_REGS _CortexM0StackOffsets[] = {
   { "CONTROL", -1,   32 },    // CONTROL
 };
 
+static const STACK_REGS _CortexM4StackOffsets[] = {
+  { "R0", 0x20, 32 },    // R0
+  { "R1", 0x24, 32 },    // R1
+  { "R2", 0x28, 32 },    // R2
+  { "R3", 0x2C, 32 },    // R3
+  { "R4", 0x1C, 32 },    // R4
+  { "R5", 0x18, 32 },    // R5
+  { "R6", 0x14, 32 },    // R6
+  { "R7", 0x10, 32 },    // R7
+  { "R8", 0x0C, 32 },    // R8
+  { "R9", 0x08, 32 },    // R9
+  { "R10", 0x04, 32 },    // R10
+  { "R11", 0x00, 32 },    // R11
+  { "R12", 0x30, 32 },    // R12
+  { "SP", -2,   32 },    // SP
+  { "LR", 0x34, 32 },    // LR
+  { "PC", 0x38, 32 },    // PC
+  { "XPSR", 0x3C, 32 },    // XPSR
+  { "MSP", -1,   32 },    // MSP
+  { "PSP", -1,   32 },    // PSP
+  { "PRIMASK", -1,   32 },    // PRIMASK
+  { "BASEPRI", -1,   32 },    // BASEPRI
+  { "FAULTMASK", -1,   32 },    // FAULTMASK
+  { "CONTROL", -1,   32 },    // CONTROL
+};
+
 typedef struct {
 	uint32_t rx[11 - 4 + 1]; //PSP = R4  - R11
 	uint32_t r[5]; //R0-R3, R12
@@ -163,6 +187,9 @@ static STACK_MEM _StackMem;
 
 EXPORT int RTOS_Init(const GDB_API *pAPI, U32 core) {
 	_pAPI = pAPI;
+
+	_pAPI->pfLogOutf("RTOS_Init Core ID: %d\n", core);
+
 	if ((core == JLINK_CORE_CORTEX_M0)
 		|| (core == JLINK_CORE_CORTEX_M1)
 		|| (core == JLINK_CORE_CORTEX_M3)
@@ -205,7 +232,7 @@ EXPORT U32 RTOS_GetThreadId(U32 n) {
 
 
 EXPORT int RTOS_GetThreadDisplay(char *pDisplay, U32 threadid) {
-	snprintf(pDisplay, 256, "CoOS Thread %d", threadid);
+   snprintf(pDisplay, 256, "CoOS Thread %d", threadid);
    return strlen(pDisplay);
 }
 
@@ -248,24 +275,46 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 
 	U32 retval;
 	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Thread[%d] Reg[%d]\n", threadid, RegIndex);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Current = %d\n", _OS.CurrentThread);
 
 	if ( threadid == _OS.CurrentThread) {
 		return -1; // Current thread or current execution returns CPU registers
 	}
 	else {
-//
-// load stack memory if necessary
-//
-		//> XPSR
+		//
+		// load stack memory if necessary
+		//
+				//> XPSR
 		if (RegIndex > 0x16) {
 			return -1;
 		}
+
+		_ReadStack(threadid);
+		 
 		int offset = _OS.StackingInfo.RegisterOffsets[RegIndex].offset;
 		uint32_t regVal = 0;
+		I32 j;
+
+		{
+			for (j = 0; j < _OS.StackingInfo.RegisterOffsets[RegIndex].bits / 8; j++) {
+				if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -1) {
+					pHexRegVal += snprintf(pHexRegVal, 3, "%02x", 0);
+				}
+				else if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -2) {
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: SP = 0x%08x\n", _StackMem.Pointer + 32);
+					pHexRegVal += snprintf(pHexRegVal, 3, "%02x", ((U8 *)&_StackMem.Pointer + 32) [j]);
+				}
+				else {
+					pHexRegVal += snprintf(pHexRegVal, 3, "%02x",
+						_StackMem.Data[_OS.StackingInfo.RegisterOffsets[RegIndex].offset + j]);
+				}
+			}
 
 
+
+			return 0;
+		}
 	}
-	
 
 	
 	return -1;
@@ -276,9 +325,10 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 	I32 j;
 	int retval;
 
-	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: %d\n", threadid);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Req=%d, Cur=%d\n", threadid, _OS.CurrentThread);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Current = %d\n", _OS.CurrentThread);
 
-	if (threadid == _OS.CurrentThread) {
+	if ( threadid == _OS.CurrentThread) {
 		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, %d = %d\n", threadid, _OS.CurrentThread);
 		return -1; // Current thread or current execution returns CPU registers
 	}

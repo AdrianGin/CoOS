@@ -33,7 +33,7 @@ CoOS::Thread Thread3( (uint32_t)&Task3, 256, 0);
 
 void SystemClock_Config(void);
 
-void HAL_SYSTICK_Callback(void)
+extern "C" void HAL_SYSTICK_Callback(void)
 {
    CoOS::ISR_SignalTest();
    Thread1.m_Flags.Set(SIGNAL_SYSTICK);
@@ -92,8 +92,8 @@ int main(void)
 
    CoOS::RoundRobin::AddThread(&Thread0);
    CoOS::RoundRobin::AddThread(&Thread1);
-   CoOS::RoundRobin::AddThread(&Thread2);
-   CoOS::RoundRobin::AddThread(&Thread3);
+  // CoOS::RoundRobin::AddThread(&Thread2);
+ //  CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();
    CoOS_InitProcessStack();
@@ -151,9 +151,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 168;
+  RCC_OscInitStruct.PLL.PLLN = 84;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);

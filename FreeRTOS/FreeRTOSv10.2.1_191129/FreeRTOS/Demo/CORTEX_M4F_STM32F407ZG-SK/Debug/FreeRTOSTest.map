@@ -79,6 +79,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./startup/system_stm32f4xx.o
  .data          0x00000000        0x0 ./startup/system_stm32f4xx.o
  .bss           0x00000000        0x0 ./startup/system_stm32f4xx.o
+ .data.SystemCoreClock
+                0x00000000        0x4 ./startup/system_stm32f4xx.o
  .data.AHBPrescTable
                 0x00000000       0x10 ./startup/system_stm32f4xx.o
  .text.SystemCoreClockUpdate
@@ -230,8 +232,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x7f ./board/iar_stm32f407zg_sk.o
  .debug_macro   0x00000000       0x35 ./board/iar_stm32f407zg_sk.o
  .debug_macro   0x00000000      0x55c ./board/iar_stm32f407zg_sk.o
- .debug_line    0x00000000      0x7eb ./board/iar_stm32f407zg_sk.o
- .debug_str     0x00000000    0x5a030 ./board/iar_stm32f407zg_sk.o
+ .debug_line    0x00000000      0x823 ./board/iar_stm32f407zg_sk.o
+ .debug_str     0x00000000    0x5a03e ./board/iar_stm32f407zg_sk.o
  .comment       0x00000000       0x7a ./board/iar_stm32f407zg_sk.o
  .debug_frame   0x00000000      0x134 ./board/iar_stm32f407zg_sk.o
  .ARM.attributes
@@ -270,17 +272,67 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/portable/MemMang/heap_2.o
  .data          0x00000000        0x0 ./Source/portable/MemMang/heap_2.o
  .bss           0x00000000        0x0 ./Source/portable/MemMang/heap_2.o
+ .bss.ucHeap    0x00000000     0x5000 ./Source/portable/MemMang/heap_2.o
  .rodata.heapSTRUCT_SIZE
                 0x00000000        0x2 ./Source/portable/MemMang/heap_2.o
+ .bss.xStart    0x00000000        0x8 ./Source/portable/MemMang/heap_2.o
+ .bss.xEnd      0x00000000        0x8 ./Source/portable/MemMang/heap_2.o
+ .data.xFreeBytesRemaining
+                0x00000000        0x4 ./Source/portable/MemMang/heap_2.o
+ .text.pvPortMalloc
+                0x00000000      0x124 ./Source/portable/MemMang/heap_2.o
+ .text.vPortFree
+                0x00000000       0x74 ./Source/portable/MemMang/heap_2.o
  .text.xPortGetFreeHeapSize
                 0x00000000       0x18 ./Source/portable/MemMang/heap_2.o
  .text.vPortInitialiseBlocks
                 0x00000000        0xe ./Source/portable/MemMang/heap_2.o
+ .text.prvHeapInit
+                0x00000000       0x54 ./Source/portable/MemMang/heap_2.o
+ .bss.xHeapHasBeenInitialised.6541
+                0x00000000        0x4 ./Source/portable/MemMang/heap_2.o
+ .debug_info    0x00000000      0xbc1 ./Source/portable/MemMang/heap_2.o
+ .debug_abbrev  0x00000000      0x2b4 ./Source/portable/MemMang/heap_2.o
+ .debug_aranges
+                0x00000000       0x40 ./Source/portable/MemMang/heap_2.o
+ .debug_ranges  0x00000000       0x30 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x1a7 ./Source/portable/MemMang/heap_2.o
  .debug_macro   0x00000000      0xa9c ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x18 ./Source/portable/MemMang/heap_2.o
  .debug_macro   0x00000000       0x22 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x58 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x94 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x35 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x34 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x16 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x10e ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x8d ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x57 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x58 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x1f ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x43 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x20 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x18e ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x339 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x16 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x29 ./Source/portable/MemMang/heap_2.o
  .debug_macro   0x00000000       0xef ./Source/portable/MemMang/heap_2.o
  .debug_macro   0x00000000       0x6a ./Source/portable/MemMang/heap_2.o
  .debug_macro   0x00000000      0x1df ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x10c ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x15a ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0xe4 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x1c ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0x26 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000      0x4cc ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0xb5 ./Source/portable/MemMang/heap_2.o
+ .debug_macro   0x00000000       0xaa ./Source/portable/MemMang/heap_2.o
+ .debug_line    0x00000000      0x5f9 ./Source/portable/MemMang/heap_2.o
+ .debug_str     0x00000000     0xaeae ./Source/portable/MemMang/heap_2.o
+ .comment       0x00000000       0x7a ./Source/portable/MemMang/heap_2.o
+ .debug_frame   0x00000000       0xc0 ./Source/portable/MemMang/heap_2.o
+ .ARM.attributes
+                0x00000000       0x34 ./Source/portable/MemMang/heap_2.o
  .group         0x00000000        0xc ./Source/portable/GCC/ARM_CM4F/port.o
  .group         0x00000000        0xc ./Source/portable/GCC/ARM_CM4F/port.o
  .group         0x00000000        0xc ./Source/portable/GCC/ARM_CM4F/port.o
@@ -300,10 +352,28 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/portable/GCC/ARM_CM4F/port.o
  .data          0x00000000        0x0 ./Source/portable/GCC/ARM_CM4F/port.o
  .bss           0x00000000        0x0 ./Source/portable/GCC/ARM_CM4F/port.o
+ .data.uxCriticalNesting
+                0x00000000        0x4 ./Source/portable/GCC/ARM_CM4F/port.o
  .rodata.pcInterruptPriorityRegisters
                 0x00000000        0x4 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.pxPortInitialiseStack
+                0x00000000       0x68 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.prvTaskExitError
+                0x00000000       0x58 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.prvPortStartFirstTask
+                0x00000000       0x26 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.SpecialFunc
+                0x00000000        0xc ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.xPortStartScheduler
+                0x00000000       0x16 ./Source/portable/GCC/ARM_CM4F/port.o
  .text.vPortEndScheduler
                 0x00000000       0x38 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.vPortEnterCritical
+                0x00000000       0x60 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.vPortExitCritical
+                0x00000000       0x54 ./Source/portable/GCC/ARM_CM4F/port.o
+ .text.vPortSetupTimerInterrupt
+                0x00000000       0x48 ./Source/portable/GCC/ARM_CM4F/port.o
  .text.vPortEnableVFP
                 0x00000000       0x14 ./Source/portable/GCC/ARM_CM4F/port.o
  .debug_macro   0x00000000      0xa9c ./Source/portable/GCC/ARM_CM4F/port.o
@@ -363,8 +433,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Source/croutine.o
  .debug_macro   0x00000000       0xaa ./Source/croutine.o
  .debug_macro   0x00000000       0x43 ./Source/croutine.o
- .debug_line    0x00000000      0x3df ./Source/croutine.o
- .debug_str     0x00000000     0x840c ./Source/croutine.o
+ .debug_line    0x00000000      0x409 ./Source/croutine.o
+ .debug_str     0x00000000     0x841a ./Source/croutine.o
  .comment       0x00000000       0x7a ./Source/croutine.o
  .ARM.attributes
                 0x00000000       0x39 ./Source/croutine.o
@@ -405,9 +475,9 @@ Discarded input sections
  .text.xEventGroupCreate
                 0x00000000       0x2e ./Source/event_groups.o
  .text.xEventGroupSync
-                0x00000000      0x15c ./Source/event_groups.o
+                0x00000000      0x12c ./Source/event_groups.o
  .text.xEventGroupWaitBits
-                0x00000000      0x19c ./Source/event_groups.o
+                0x00000000      0x16c ./Source/event_groups.o
  .text.xEventGroupClearBits
                 0x00000000       0x70 ./Source/event_groups.o
  .text.xEventGroupGetBitsFromISR
@@ -426,7 +496,7 @@ Discarded input sections
                 0x00000000       0x2c ./Source/event_groups.o
  .text.vEventGroupSetNumber
                 0x00000000       0x1c ./Source/event_groups.o
- .debug_info    0x00000000     0x11ba ./Source/event_groups.o
+ .debug_info    0x00000000     0x117d ./Source/event_groups.o
  .debug_abbrev  0x00000000      0x36d ./Source/event_groups.o
  .debug_aranges
                 0x00000000       0x78 ./Source/event_groups.o
@@ -463,8 +533,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Source/event_groups.o
  .debug_macro   0x00000000       0xaa ./Source/event_groups.o
  .debug_macro   0x00000000       0x91 ./Source/event_groups.o
- .debug_line    0x00000000      0x8c0 ./Source/event_groups.o
- .debug_str     0x00000000     0xb7aa ./Source/event_groups.o
+ .debug_line    0x00000000      0x88a ./Source/event_groups.o
+ .debug_str     0x00000000     0xb7b8 ./Source/event_groups.o
  .comment       0x00000000       0x7a ./Source/event_groups.o
  .debug_frame   0x00000000      0x1d0 ./Source/event_groups.o
  .ARM.attributes
@@ -501,6 +571,12 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/list.o
  .data          0x00000000        0x0 ./Source/list.o
  .bss           0x00000000        0x0 ./Source/list.o
+ .text.vListInitialise
+                0x00000000       0x40 ./Source/list.o
+ .text.vListInitialiseItem
+                0x00000000       0x1a ./Source/list.o
+ .text.vListInsert
+                0x00000000       0x72 ./Source/list.o
  .debug_macro   0x00000000      0xa9c ./Source/list.o
  .debug_macro   0x00000000       0x18 ./Source/list.o
  .debug_macro   0x00000000       0x22 ./Source/list.o
@@ -566,6 +642,12 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/queue.o
  .data          0x00000000        0x0 ./Source/queue.o
  .bss           0x00000000        0x0 ./Source/queue.o
+ .text.xQueueGenericReset
+                0x00000000       0xd0 ./Source/queue.o
+ .text.xQueueGenericCreate
+                0x00000000       0x78 ./Source/queue.o
+ .text.prvInitialiseNewQueue
+                0x00000000       0x46 ./Source/queue.o
  .text.prvInitialiseMutex
                 0x00000000       0x34 ./Source/queue.o
  .text.xQueueCreateMutex
@@ -576,10 +658,16 @@ Discarded input sections
                 0x00000000       0x6c ./Source/queue.o
  .text.xQueueCreateCountingSemaphore
                 0x00000000       0x66 ./Source/queue.o
+ .text.xQueueGenericSend
+                0x00000000      0x1cc ./Source/queue.o
+ .text.xQueueGenericSendFromISR
+                0x00000000      0x130 ./Source/queue.o
+ .text.xQueueReceive
+                0x00000000      0x190 ./Source/queue.o
  .text.xQueueSemaphoreTake
-                0x00000000      0x218 ./Source/queue.o
+                0x00000000      0x1e8 ./Source/queue.o
  .text.xQueuePeek
-                0x00000000      0x1c4 ./Source/queue.o
+                0x00000000      0x194 ./Source/queue.o
  .text.xQueueReceiveFromISR
                 0x00000000      0x100 ./Source/queue.o
  .text.xQueuePeekFromISR
@@ -600,10 +688,22 @@ Discarded input sections
                 0x00000000       0x1a ./Source/queue.o
  .text.prvGetDisinheritPriorityAfterTimeout
                 0x00000000       0x30 ./Source/queue.o
+ .text.prvCopyDataToQueue
+                0x00000000       0xd4 ./Source/queue.o
+ .text.prvCopyDataFromQueue
+                0x00000000       0x4c ./Source/queue.o
+ .text.prvUnlockQueue
+                0x00000000       0xa4 ./Source/queue.o
+ .text.prvIsQueueEmpty
+                0x00000000       0x2c ./Source/queue.o
  .text.xQueueIsQueueEmptyFromISR
                 0x00000000       0x48 ./Source/queue.o
+ .text.prvIsQueueFull
+                0x00000000       0x30 ./Source/queue.o
  .text.xQueueIsQueueFullFromISR
                 0x00000000       0x4c ./Source/queue.o
+ .text.vQueueAddToRegistry
+                0x00000000       0x54 ./Source/queue.o
  .text.pcQueueGetName
                 0x00000000       0x4c ./Source/queue.o
  .text.vQueueUnregisterQueue
@@ -638,6 +738,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x4cc ./Source/queue.o
  .debug_macro   0x00000000       0xb5 ./Source/queue.o
  .debug_macro   0x00000000       0xaa ./Source/queue.o
+ COMMON         0x00000000       0x40 ./Source/queue.o
  .group         0x00000000        0xc ./Source/stream_buffer.o
  .group         0x00000000        0xc ./Source/stream_buffer.o
  .group         0x00000000        0xc ./Source/stream_buffer.o
@@ -753,8 +854,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Source/stream_buffer.o
  .debug_macro   0x00000000       0xaa ./Source/stream_buffer.o
  .debug_macro   0x00000000       0x18 ./Source/stream_buffer.o
- .debug_line    0x00000000      0xd5d ./Source/stream_buffer.o
- .debug_str     0x00000000     0xb8ad ./Source/stream_buffer.o
+ .debug_line    0x00000000      0xd87 ./Source/stream_buffer.o
+ .debug_str     0x00000000     0xb8bb ./Source/stream_buffer.o
  .comment       0x00000000       0x7a ./Source/stream_buffer.o
  .debug_frame   0x00000000      0x3a0 ./Source/stream_buffer.o
  .ARM.attributes
@@ -796,6 +897,30 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/tasks.o
  .data          0x00000000        0x0 ./Source/tasks.o
  .bss           0x00000000        0x0 ./Source/tasks.o
+ .bss.xDelayedTaskList1
+                0x00000000       0x14 ./Source/tasks.o
+ .bss.xDelayedTaskList2
+                0x00000000       0x14 ./Source/tasks.o
+ .bss.xTasksWaitingTermination
+                0x00000000       0x14 ./Source/tasks.o
+ .bss.uxDeletedTasksWaitingCleanUp
+                0x00000000        0x4 ./Source/tasks.o
+ .bss.xSuspendedTaskList
+                0x00000000       0x14 ./Source/tasks.o
+ .bss.uxCurrentNumberOfTasks
+                0x00000000        0x4 ./Source/tasks.o
+ .bss.xSchedulerRunning
+                0x00000000        0x4 ./Source/tasks.o
+ .bss.uxTaskNumber
+                0x00000000        0x4 ./Source/tasks.o
+ .bss.xIdleTaskHandle
+                0x00000000        0x4 ./Source/tasks.o
+ .text.xTaskCreate
+                0x00000000       0x82 ./Source/tasks.o
+ .text.prvInitialiseNewTask
+                0x00000000      0x122 ./Source/tasks.o
+ .text.prvAddNewTaskToReadyList
+                0x00000000       0xdc ./Source/tasks.o
  .text.vTaskDelete
                 0x00000000      0x120 ./Source/tasks.o
  .text.vTaskDelayUntil
@@ -818,8 +943,16 @@ Discarded input sections
                 0x00000000       0xbc ./Source/tasks.o
  .text.xTaskResumeFromISR
                 0x00000000       0xe4 ./Source/tasks.o
+ .text.vTaskStartScheduler
+                0x00000000       0x6c ./Source/tasks.o
  .text.vTaskEndScheduler
                 0x00000000       0x30 ./Source/tasks.o
+ .text.vTaskSuspendAll
+                0x00000000       0x1c ./Source/tasks.o
+ .text.xTaskResumeAll
+                0x00000000      0x138 ./Source/tasks.o
+ .text.xTaskGetTickCount
+                0x00000000       0x20 ./Source/tasks.o
  .text.xTaskGetTickCountFromISR
                 0x00000000       0x24 ./Source/tasks.o
  .text.uxTaskGetNumberOfTasks
@@ -828,26 +961,44 @@ Discarded input sections
                 0x00000000       0x48 ./Source/tasks.o
  .text.uxTaskGetSystemState
                 0x00000000      0x11c ./Source/tasks.o
+ .text.vTaskPlaceOnEventList
+                0x00000000       0x48 ./Source/tasks.o
  .text.vTaskPlaceOnUnorderedEventList
                 0x00000000       0x78 ./Source/tasks.o
  .text.vTaskRemoveFromUnorderedEventList
                 0x00000000       0xc4 ./Source/tasks.o
  .text.vTaskSetTimeOutState
                 0x00000000       0x4c ./Source/tasks.o
+ .text.vTaskInternalSetTimeOutState
+                0x00000000       0x2c ./Source/tasks.o
+ .text.xTaskCheckForTimeOut
+                0x00000000       0xc4 ./Source/tasks.o
+ .text.vTaskMissedYield
+                0x00000000       0x18 ./Source/tasks.o
  .text.uxTaskGetTaskNumber
                 0x00000000       0x2c ./Source/tasks.o
  .text.vTaskSetTaskNumber
                 0x00000000       0x26 ./Source/tasks.o
+ .text.prvIdleTask
+                0x00000000       0x34 ./Source/tasks.o
+ .text.prvInitialiseTaskLists
+                0x00000000       0x80 ./Source/tasks.o
+ .text.prvCheckTasksWaitingTermination
+                0x00000000       0x5c ./Source/tasks.o
  .text.vTaskGetInfo
                 0x00000000       0xcc ./Source/tasks.o
  .text.prvListTasksWithinSingleList
                 0x00000000       0xa4 ./Source/tasks.o
  .text.prvTaskCheckFreeStackSpace
                 0x00000000       0x38 ./Source/tasks.o
+ .text.prvDeleteTCB
+                0x00000000       0x20 ./Source/tasks.o
  .text.xTaskGetCurrentTaskHandle
                 0x00000000       0x20 ./Source/tasks.o
  .text.xTaskPriorityInherit
                 0x00000000      0x100 ./Source/tasks.o
+ .text.xTaskPriorityDisinherit
+                0x00000000      0x10c ./Source/tasks.o
  .text.vTaskPriorityDisinheritAfterTimeout
                 0x00000000      0x134 ./Source/tasks.o
  .text.uxTaskResetEventItemValue
@@ -866,6 +1017,8 @@ Discarded input sections
                 0x00000000      0x124 ./Source/tasks.o
  .text.xTaskNotifyStateClear
                 0x00000000       0x4c ./Source/tasks.o
+ .text.prvAddCurrentTaskToDelayedList
+                0x00000000       0xcc ./Source/tasks.o
  .debug_macro   0x00000000      0xa9c ./Source/tasks.o
  .debug_macro   0x00000000       0x18 ./Source/tasks.o
  .debug_macro   0x00000000       0x22 ./Source/tasks.o
@@ -934,30 +1087,11 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source/timers.o
  .data          0x00000000        0x0 ./Source/timers.o
  .bss           0x00000000        0x0 ./Source/timers.o
- .text.xTimerCreate
-                0x00000000       0x42 ./Source/timers.o
- .text.prvInitialiseNewTimer
-                0x00000000       0x76 ./Source/timers.o
- .text.xTimerGetTimerDaemonTaskHandle
-                0x00000000       0x38 ./Source/timers.o
- .text.xTimerGetPeriod
-                0x00000000       0x38 ./Source/timers.o
- .text.vTimerSetReloadMode
-                0x00000000       0x66 ./Source/timers.o
- .text.xTimerGetExpiryTime
-                0x00000000       0x3c ./Source/timers.o
- .text.pcTimerGetName
-                0x00000000       0x38 ./Source/timers.o
- .text.xTimerIsTimerActive
-                0x00000000       0x52 ./Source/timers.o
- .text.pvTimerGetTimerID
-                0x00000000       0x40 ./Source/timers.o
- .text.vTimerSetTimerID
-                0x00000000       0x40 ./Source/timers.o
- .text.uxTimerGetTimerNumber
+ .debug_info    0x00000000      0x941 ./Source/timers.o
+ .debug_abbrev  0x00000000      0x1b4 ./Source/timers.o
+ .debug_aranges
                 0x00000000       0x18 ./Source/timers.o
- .text.vTimerSetTimerNumber
-                0x00000000       0x1c ./Source/timers.o
+ .debug_macro   0x00000000      0x1b1 ./Source/timers.o
  .debug_macro   0x00000000      0xa9c ./Source/timers.o
  .debug_macro   0x00000000       0x18 ./Source/timers.o
  .debug_macro   0x00000000       0x22 ./Source/timers.o
@@ -989,6 +1123,12 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Source/timers.o
  .debug_macro   0x00000000       0xaa ./Source/timers.o
  .debug_macro   0x00000000       0x80 ./Source/timers.o
+ .debug_macro   0x00000000       0x97 ./Source/timers.o
+ .debug_line    0x00000000      0x49b ./Source/timers.o
+ .debug_str     0x00000000     0xb9d4 ./Source/timers.o
+ .comment       0x00000000       0x7a ./Source/timers.o
+ .ARM.attributes
+                0x00000000       0x39 ./Source/timers.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
@@ -1030,6 +1170,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .data          0x00000000        0x0 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .bss           0x00000000        0x0 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.NVIC_PriorityGroupConfig
+                0x00000000       0x28 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .text.NVIC_Init
                 0x00000000       0xc4 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .text.NVIC_SetVectorTable
@@ -1038,6 +1180,12 @@ Discarded input sections
                 0x00000000       0x44 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .text.SysTick_CLKSourceConfig
                 0x00000000       0x38 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_info    0x00000000      0x596 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_abbrev  0x00000000      0x199 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_aranges
+                0x00000000       0x40 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_ranges  0x00000000       0x30 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_macro   0x00000000      0x1d6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .debug_macro   0x00000000      0xa9c ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .debug_macro   0x00000000       0x5d ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .debug_macro   0x00000000       0x22 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
@@ -1075,6 +1223,13 @@ Discarded input sections
  .debug_macro   0x00000000      0x220 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .debug_macro   0x00000000       0x34 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .debug_macro   0x00000000       0x35 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_macro   0x00000000       0x79 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_line    0x00000000      0x7b3 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_str     0x00000000    0x57e8f ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .comment       0x00000000       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_frame   0x00000000       0xd8 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .ARM.attributes
+                0x00000000       0x34 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
  .group         0x00000000        0xc ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
@@ -1280,8 +1435,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x7f ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
  .debug_macro   0x00000000       0x35 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
  .debug_macro   0x00000000      0x25f ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
- .debug_line    0x00000000      0x976 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
- .debug_str     0x00000000    0x57f2c ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_line    0x00000000      0x9ae ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_str     0x00000000    0x57f3a ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
  .comment       0x00000000       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
  .debug_frame   0x00000000      0x23c ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
  .ARM.attributes
@@ -1461,8 +1616,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x7f ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
  .debug_macro   0x00000000       0x35 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
  .debug_macro   0x00000000      0x532 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
- .debug_line    0x00000000      0xde4 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
- .debug_str     0x00000000    0x587ad ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_line    0x00000000      0xe1c ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_str     0x00000000    0x587bb ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
  .comment       0x00000000       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
  .debug_frame   0x00000000      0x6d4 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
  .ARM.attributes
@@ -1564,8 +1719,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x7f ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
  .debug_macro   0x00000000       0x35 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
  .debug_macro   0x00000000       0xd9 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
- .debug_line    0x00000000      0x746 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
- .debug_str     0x00000000    0x57edd ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_line    0x00000000      0x77e ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_str     0x00000000    0x57eeb ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
  .comment       0x00000000       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
  .debug_frame   0x00000000       0xf4 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
  .ARM.attributes
@@ -1658,8 +1813,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/BlockQ.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/BlockQ.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/BlockQ.o
- .debug_line    0x00000000      0x63b ./Common/Minimal/BlockQ.o
- .debug_str     0x00000000     0xb4ac ./Common/Minimal/BlockQ.o
+ .debug_line    0x00000000      0x673 ./Common/Minimal/BlockQ.o
+ .debug_str     0x00000000     0xb4ba ./Common/Minimal/BlockQ.o
  .comment       0x00000000       0x7a ./Common/Minimal/BlockQ.o
  .debug_frame   0x00000000       0xa0 ./Common/Minimal/BlockQ.o
  .ARM.attributes
@@ -1772,8 +1927,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xaa ./Common/Minimal/GenQTest.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/GenQTest.o
  .debug_macro   0x00000000       0x7e ./Common/Minimal/GenQTest.o
- .debug_line    0x00000000      0x90c ./Common/Minimal/GenQTest.o
- .debug_str     0x00000000     0xbd50 ./Common/Minimal/GenQTest.o
+ .debug_line    0x00000000      0x944 ./Common/Minimal/GenQTest.o
+ .debug_str     0x00000000     0xbd5e ./Common/Minimal/GenQTest.o
  .comment       0x00000000       0x7a ./Common/Minimal/GenQTest.o
  .debug_frame   0x00000000      0x120 ./Common/Minimal/GenQTest.o
  .ARM.attributes
@@ -1864,8 +2019,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/PollQ.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/PollQ.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/PollQ.o
- .debug_line    0x00000000      0x5d0 ./Common/Minimal/PollQ.o
- .debug_str     0x00000000     0xb49a ./Common/Minimal/PollQ.o
+ .debug_line    0x00000000      0x608 ./Common/Minimal/PollQ.o
+ .debug_str     0x00000000     0xb4a8 ./Common/Minimal/PollQ.o
  .comment       0x00000000       0x7a ./Common/Minimal/PollQ.o
  .debug_frame   0x00000000       0x9c ./Common/Minimal/PollQ.o
  .ARM.attributes
@@ -1940,8 +2095,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/blocktim.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/blocktim.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/blocktim.o
- .debug_line    0x00000000      0x77a ./Common/Minimal/blocktim.o
- .debug_str     0x00000000     0x88fa ./Common/Minimal/blocktim.o
+ .debug_line    0x00000000      0x7b2 ./Common/Minimal/blocktim.o
+ .debug_str     0x00000000     0x8908 ./Common/Minimal/blocktim.o
  .comment       0x00000000       0x7a ./Common/Minimal/blocktim.o
  .debug_frame   0x00000000       0xc0 ./Common/Minimal/blocktim.o
  .ARM.attributes
@@ -2010,8 +2165,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xaa ./Common/Minimal/countsem.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/countsem.o
  .debug_macro   0x00000000       0x7e ./Common/Minimal/countsem.o
- .debug_line    0x00000000      0x621 ./Common/Minimal/countsem.o
- .debug_str     0x00000000     0x8ec0 ./Common/Minimal/countsem.o
+ .debug_line    0x00000000      0x659 ./Common/Minimal/countsem.o
+ .debug_str     0x00000000     0x8ece ./Common/Minimal/countsem.o
  .comment       0x00000000       0x7a ./Common/Minimal/countsem.o
  .debug_frame   0x00000000       0xc4 ./Common/Minimal/countsem.o
  .ARM.attributes
@@ -2104,8 +2259,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x4cc ./Common/Minimal/death.o
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/death.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/death.o
- .debug_line    0x00000000      0x5a8 ./Common/Minimal/death.o
- .debug_str     0x00000000     0xac4c ./Common/Minimal/death.o
+ .debug_line    0x00000000      0x5e0 ./Common/Minimal/death.o
+ .debug_str     0x00000000     0xac5a ./Common/Minimal/death.o
  .comment       0x00000000       0x7a ./Common/Minimal/death.o
  .debug_frame   0x00000000       0x98 ./Common/Minimal/death.o
  .ARM.attributes
@@ -2219,8 +2374,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xaa ./Common/Minimal/dynamic.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/dynamic.o
  .debug_macro   0x00000000       0x7e ./Common/Minimal/dynamic.o
- .debug_line    0x00000000      0x71b ./Common/Minimal/dynamic.o
- .debug_str     0x00000000     0xbce3 ./Common/Minimal/dynamic.o
+ .debug_line    0x00000000      0x753 ./Common/Minimal/dynamic.o
+ .debug_str     0x00000000     0xbcf1 ./Common/Minimal/dynamic.o
  .comment       0x00000000       0x7a ./Common/Minimal/dynamic.o
  .debug_frame   0x00000000       0xfc ./Common/Minimal/dynamic.o
  .ARM.attributes
@@ -2304,8 +2459,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/flash.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/flash.o
  .debug_macro   0x00000000       0x10 ./Common/Minimal/flash.o
- .debug_line    0x00000000      0x554 ./Common/Minimal/flash.o
- .debug_str     0x00000000     0xac29 ./Common/Minimal/flash.o
+ .debug_line    0x00000000      0x58c ./Common/Minimal/flash.o
+ .debug_str     0x00000000     0xac37 ./Common/Minimal/flash.o
  .comment       0x00000000       0x7a ./Common/Minimal/flash.o
  .debug_frame   0x00000000       0x54 ./Common/Minimal/flash.o
  .ARM.attributes
@@ -2388,8 +2543,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x4cc ./Common/Minimal/integer.o
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/integer.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/integer.o
- .debug_line    0x00000000      0x597 ./Common/Minimal/integer.o
- .debug_str     0x00000000     0xacad ./Common/Minimal/integer.o
+ .debug_line    0x00000000      0x5cf ./Common/Minimal/integer.o
+ .debug_str     0x00000000     0xacbb ./Common/Minimal/integer.o
  .comment       0x00000000       0x7a ./Common/Minimal/integer.o
  .debug_frame   0x00000000       0x7c ./Common/Minimal/integer.o
  .ARM.attributes
@@ -2473,8 +2628,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xaa ./Common/Minimal/recmutex.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/recmutex.o
  .debug_macro   0x00000000       0x7e ./Common/Minimal/recmutex.o
- .debug_line    0x00000000      0x690 ./Common/Minimal/recmutex.o
- .debug_str     0x00000000     0x9059 ./Common/Minimal/recmutex.o
+ .debug_line    0x00000000      0x6c8 ./Common/Minimal/recmutex.o
+ .debug_str     0x00000000     0x9067 ./Common/Minimal/recmutex.o
  .comment       0x00000000       0x7a ./Common/Minimal/recmutex.o
  .debug_frame   0x00000000       0xbc ./Common/Minimal/recmutex.o
  .ARM.attributes
@@ -2565,8 +2720,8 @@ Discarded input sections
  .debug_macro   0x00000000       0xaa ./Common/Minimal/semtest.o
  .debug_macro   0x00000000       0x80 ./Common/Minimal/semtest.o
  .debug_macro   0x00000000       0x7e ./Common/Minimal/semtest.o
- .debug_line    0x00000000      0x642 ./Common/Minimal/semtest.o
- .debug_str     0x00000000     0xbbd1 ./Common/Minimal/semtest.o
+ .debug_line    0x00000000      0x67a ./Common/Minimal/semtest.o
+ .debug_str     0x00000000     0xbbdf ./Common/Minimal/semtest.o
  .comment       0x00000000       0x7a ./Common/Minimal/semtest.o
  .debug_frame   0x00000000       0x80 ./Common/Minimal/semtest.o
  .ARM.attributes
@@ -2659,8 +2814,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x4cc ./Common/Minimal/sp_flop.o
  .debug_macro   0x00000000       0xb5 ./Common/Minimal/sp_flop.o
  .debug_macro   0x00000000       0xaa ./Common/Minimal/sp_flop.o
- .debug_line    0x00000000      0x72e ./Common/Minimal/sp_flop.o
- .debug_str     0x00000000     0xb534 ./Common/Minimal/sp_flop.o
+ .debug_line    0x00000000      0x766 ./Common/Minimal/sp_flop.o
+ .debug_str     0x00000000     0xb542 ./Common/Minimal/sp_flop.o
  .comment       0x00000000       0x7a ./Common/Minimal/sp_flop.o
  .debug_frame   0x00000000       0xd8 ./Common/Minimal/sp_flop.o
  .ARM.attributes
@@ -2779,8 +2934,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x7f ./ParTest.o
  .debug_macro   0x00000000       0x35 ./ParTest.o
  .debug_macro   0x00000000      0x55c ./ParTest.o
- .debug_line    0x00000000      0x8f9 ./ParTest.o
- .debug_str     0x00000000    0x5d611 ./ParTest.o
+ .debug_line    0x00000000      0x969 ./ParTest.o
+ .debug_str     0x00000000    0x5d61f ./ParTest.o
  .comment       0x00000000       0x7a ./ParTest.o
  .debug_frame   0x00000000       0x74 ./ParTest.o
  .ARM.attributes
@@ -2846,21 +3001,27 @@ Discarded input sections
                 0x00000000        0x4 ./main.o
  .bss.ulButtonPressCounts
                 0x00000000        0x4 ./main.o
- .text.BigTestFunc
-                0x00000000       0x34 ./main.o
+ .text.prvPortStartFirstTask
+                0x00000000       0x28 ./main.o
  .text.prvCheckTimerCallback
                 0x00000000      0x110 ./main.o
  .text.prvButtonTestTask
                 0x00000000       0x54 ./main.o
+ .text.prvSetupHardware
+                0x00000000       0x14 ./main.o
  .text.prvSetupNestedFPUInterruptsTest
                 0x00000000       0x3e ./main.o
  .text.prvOptionallyCreateComprehensveTestApplication
                 0x00000000        0xe ./main.o
- .bss.ulLastRegTest1Value.9570
+ .text.vApplicationMallocFailedHook
+                0x00000000       0x1c ./main.o
+ .text.vApplicationIdleHook
+                0x00000000        0xe ./main.o
+ .bss.ulLastRegTest1Value.9573
                 0x00000000        0x4 ./main.o
- .bss.ulLastRegTest2Value.9571
+ .bss.ulLastRegTest2Value.9574
                 0x00000000        0x4 ./main.o
- .bss.lChangedTimerPeriodAlready.9569
+ .bss.lChangedTimerPeriodAlready.9572
                 0x00000000        0x4 ./main.o
  .debug_macro   0x00000000      0xa9c ./main.o
  .debug_macro   0x00000000      0x174 ./main.o
@@ -3003,6 +3164,11 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./stm32f4xx_it.o
  .debug_macro   0x00000000       0x7f ./stm32f4xx_it.o
  .debug_macro   0x00000000       0x35 ./stm32f4xx_it.o
+ .group         0x00000000        0xc ./testF.o
+ .text          0x00000000        0x0 ./testF.o
+ .data          0x00000000        0x0 ./testF.o
+ .bss           0x00000000        0x0 ./testF.o
+ .debug_macro   0x00000000      0xa9c ./testF.o
  .text          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-exit.o)
@@ -3027,9 +3193,17 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
  .data          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
  .bss           0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
+ .text.memcpy   0x00000000       0x1c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000000       0x28 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x00000000       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
  .text          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
  .data          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
  .bss           0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
+ .text.memset   0x00000000       0x10 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000       0x20 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000000       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
  .text          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
@@ -3091,6 +3265,7 @@ LOAD ./Common/Minimal/sp_flop.o
 LOAD ./ParTest.o
 LOAD ./main.o
 LOAD ./stm32f4xx_it.o
+LOAD ./testF.o
 LOAD c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libstdc++_nano.a
 LOAD c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 START GROUP
@@ -3126,7 +3301,7 @@ LOAD c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gc
  *(.versioninfo)
                 0x08000194                . = ALIGN (0x4)
 
-.text           0x080001a0     0x29c8
+.text           0x080001a0      0xaa4
                 0x080001a0                . = ALIGN (0x4)
  *(.text)
  .text          0x080001a0       0x40 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
@@ -3196,430 +3371,225 @@ LOAD c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gc
                 0x08000234                SystemInit
  .text.SetSysClock
                 0x080002a0       0xf8 ./startup/system_stm32f4xx.o
- .text.pvPortMalloc
-                0x08000398      0x124 ./Source/portable/MemMang/heap_2.o
-                0x08000398                pvPortMalloc
- .text.vPortFree
-                0x080004bc       0x74 ./Source/portable/MemMang/heap_2.o
-                0x080004bc                vPortFree
- .text.prvHeapInit
-                0x08000530       0x54 ./Source/portable/MemMang/heap_2.o
- .text.pxPortInitialiseStack
-                0x08000584       0x68 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x08000584                pxPortInitialiseStack
- .text.prvTaskExitError
-                0x080005ec       0x58 ./Source/portable/GCC/ARM_CM4F/port.o
- *fill*         0x08000644        0xc 
+ *fill*         0x08000398        0x8 
  .text.SVC_Handler
-                0x08000650       0x28 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x08000650                SVC_Handler
- .text.prvPortStartFirstTask
-                0x08000678       0x28 ./Source/portable/GCC/ARM_CM4F/port.o
- .text.xPortStartScheduler
-                0x080006a0      0x130 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x080006a0                xPortStartScheduler
- .text.vPortEnterCritical
-                0x080007d0       0x60 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x080007d0                vPortEnterCritical
- .text.vPortExitCritical
-                0x08000830       0x54 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x08000830                vPortExitCritical
- *fill*         0x08000884        0xc 
+                0x080003a0       0x28 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x080003a0                SVC_Handler
+ *fill*         0x080003c8        0x8 
  .text.PendSV_Handler
-                0x08000890       0x68 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x08000890                PendSV_Handler
+                0x080003d0       0x68 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x080003d0                PendSV_Handler
  .text.SysTick_Handler
-                0x080008f8       0x44 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x080008f8                SysTick_Handler
- .text.vPortSetupTimerInterrupt
-                0x0800093c       0x48 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x0800093c                vPortSetupTimerInterrupt
+                0x08000438       0x44 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x08000438                SysTick_Handler
  .text.vPortValidateInterruptPriority
-                0x08000984       0x80 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x08000984                vPortValidateInterruptPriority
- .text.vListInitialise
-                0x08000a04       0x40 ./Source/list.o
-                0x08000a04                vListInitialise
- .text.vListInitialiseItem
-                0x08000a44       0x1a ./Source/list.o
-                0x08000a44                vListInitialiseItem
+                0x0800047c       0x80 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x0800047c                vPortValidateInterruptPriority
  .text.vListInsertEnd
-                0x08000a5e       0x48 ./Source/list.o
-                0x08000a5e                vListInsertEnd
- .text.vListInsert
-                0x08000aa6       0x72 ./Source/list.o
-                0x08000aa6                vListInsert
+                0x080004fc       0x48 ./Source/list.o
+                0x080004fc                vListInsertEnd
  .text.uxListRemove
-                0x08000b18       0x54 ./Source/list.o
-                0x08000b18                uxListRemove
- .text.xQueueGenericReset
-                0x08000b6c       0xd0 ./Source/queue.o
-                0x08000b6c                xQueueGenericReset
- .text.xQueueGenericCreate
-                0x08000c3c       0x78 ./Source/queue.o
-                0x08000c3c                xQueueGenericCreate
- .text.prvInitialiseNewQueue
-                0x08000cb4       0x46 ./Source/queue.o
- *fill*         0x08000cfa        0x2 
- .text.xQueueGenericSend
-                0x08000cfc      0x1fc ./Source/queue.o
-                0x08000cfc                xQueueGenericSend
- .text.xQueueGenericSendFromISR
-                0x08000ef8      0x130 ./Source/queue.o
-                0x08000ef8                xQueueGenericSendFromISR
+                0x08000544       0x54 ./Source/list.o
+                0x08000544                uxListRemove
  .text.xQueueGiveFromISR
-                0x08001028      0x11a ./Source/queue.o
-                0x08001028                xQueueGiveFromISR
- *fill*         0x08001142        0x2 
- .text.xQueueReceive
-                0x08001144      0x1c0 ./Source/queue.o
-                0x08001144                xQueueReceive
- .text.prvCopyDataToQueue
-                0x08001304       0xd4 ./Source/queue.o
- .text.prvCopyDataFromQueue
-                0x080013d8       0x4c ./Source/queue.o
- .text.prvUnlockQueue
-                0x08001424       0xa4 ./Source/queue.o
- .text.prvIsQueueEmpty
-                0x080014c8       0x2c ./Source/queue.o
- .text.prvIsQueueFull
-                0x080014f4       0x30 ./Source/queue.o
- .text.vQueueAddToRegistry
-                0x08001524       0x54 ./Source/queue.o
-                0x08001524                vQueueAddToRegistry
- .text.vQueueWaitForMessageRestricted
-                0x08001578       0x68 ./Source/queue.o
-                0x08001578                vQueueWaitForMessageRestricted
- .text.xTaskCreate
-                0x080015e0       0x82 ./Source/tasks.o
-                0x080015e0                xTaskCreate
- .text.prvInitialiseNewTask
-                0x08001662      0x122 ./Source/tasks.o
- .text.prvAddNewTaskToReadyList
-                0x08001784       0xdc ./Source/tasks.o
- .text.vTaskStartScheduler
-                0x08001860       0x9c ./Source/tasks.o
-                0x08001860                vTaskStartScheduler
- .text.vTaskSuspendAll
-                0x080018fc       0x1c ./Source/tasks.o
-                0x080018fc                vTaskSuspendAll
- .text.xTaskResumeAll
-                0x08001918      0x138 ./Source/tasks.o
-                0x08001918                xTaskResumeAll
- .text.xTaskGetTickCount
-                0x08001a50       0x20 ./Source/tasks.o
-                0x08001a50                xTaskGetTickCount
+                0x08000598      0x11a ./Source/queue.o
+                0x08000598                xQueueGiveFromISR
+ *fill*         0x080006b2        0x2 
  .text.xTaskIncrementTick
-                0x08001a70      0x180 ./Source/tasks.o
-                0x08001a70                xTaskIncrementTick
+                0x080006b4      0x180 ./Source/tasks.o
+                0x080006b4                xTaskIncrementTick
  .text.vTaskSwitchContext
-                0x08001bf0      0x100 ./Source/tasks.o
-                0x08001bf0                vTaskSwitchContext
- .text.vTaskPlaceOnEventList
-                0x08001cf0       0x48 ./Source/tasks.o
-                0x08001cf0                vTaskPlaceOnEventList
- .text.vTaskPlaceOnEventListRestricted
-                0x08001d38       0x58 ./Source/tasks.o
-                0x08001d38                vTaskPlaceOnEventListRestricted
+                0x08000834      0x100 ./Source/tasks.o
+                0x08000834                vTaskSwitchContext
  .text.xTaskRemoveFromEventList
-                0x08001d90       0xc4 ./Source/tasks.o
-                0x08001d90                xTaskRemoveFromEventList
- .text.vTaskInternalSetTimeOutState
-                0x08001e54       0x2c ./Source/tasks.o
-                0x08001e54                vTaskInternalSetTimeOutState
- .text.xTaskCheckForTimeOut
-                0x08001e80       0xc4 ./Source/tasks.o
-                0x08001e80                xTaskCheckForTimeOut
- .text.vTaskMissedYield
-                0x08001f44       0x18 ./Source/tasks.o
-                0x08001f44                vTaskMissedYield
- .text.prvIdleTask
-                0x08001f5c       0x34 ./Source/tasks.o
- .text.prvInitialiseTaskLists
-                0x08001f90       0x80 ./Source/tasks.o
- .text.prvCheckTasksWaitingTermination
-                0x08002010       0x5c ./Source/tasks.o
- .text.prvDeleteTCB
-                0x0800206c       0x20 ./Source/tasks.o
+                0x08000934       0xc4 ./Source/tasks.o
+                0x08000934                xTaskRemoveFromEventList
  .text.prvResetNextTaskUnblockTime
-                0x0800208c       0x40 ./Source/tasks.o
- .text.xTaskGetSchedulerState
-                0x080020cc       0x3c ./Source/tasks.o
-                0x080020cc                xTaskGetSchedulerState
- .text.xTaskPriorityDisinherit
-                0x08002108      0x10c ./Source/tasks.o
-                0x08002108                xTaskPriorityDisinherit
- .text.prvAddCurrentTaskToDelayedList
-                0x08002214       0xcc ./Source/tasks.o
- .text.xTimerCreateTimerTask
-                0x080022e0       0x64 ./Source/timers.o
-                0x080022e0                xTimerCreateTimerTask
- .text.xTimerGenericCommand
-                0x08002344       0x9c ./Source/timers.o
-                0x08002344                xTimerGenericCommand
- .text.prvProcessExpiredTimer
-                0x080023e0       0x98 ./Source/timers.o
- .text.prvTimerTask
-                0x08002478       0x24 ./Source/timers.o
- .text.prvProcessTimerOrBlockTask
-                0x0800249c       0x9c ./Source/timers.o
- .text.prvGetNextExpireTime
-                0x08002538       0x48 ./Source/timers.o
- .text.prvSampleTimeNow
-                0x08002580       0x40 ./Source/timers.o
- .text.prvInsertTimerInActiveList
-                0x080025c0       0x84 ./Source/timers.o
- .text.prvProcessReceivedCommands
-                0x08002644      0x18c ./Source/timers.o
- .text.prvSwitchTimerLists
-                0x080027d0       0xc8 ./Source/timers.o
- .text.prvCheckForValidListAndQueue
-                0x08002898       0x6c ./Source/timers.o
- .text.NVIC_PriorityGroupConfig
-                0x08002904       0x28 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
-                0x08002904                NVIC_PriorityGroupConfig
+                0x080009f8       0x40 ./Source/tasks.o
  .text.EXTI_ClearITPendingBit
-                0x0800292c       0x20 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
-                0x0800292c                EXTI_ClearITPendingBit
+                0x08000a38       0x20 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+                0x08000a38                EXTI_ClearITPendingBit
  .text.NVIC_SetPendingIRQ
-                0x0800294c       0x34 ./main.o
- .text.main     0x08002980        0xe ./main.o
-                0x08002980                main
- .text.prvSetupHardware
-                0x0800298e       0x14 ./main.o
+                0x08000a58       0x34 ./main.o
+ .text.main     0x08000a8c        0xa ./main.o
+                0x08000a8c                main
  .text.vApplicationTickHook
-                0x080029a2        0xe ./main.o
-                0x080029a2                vApplicationTickHook
+                0x08000a96        0xe ./main.o
+                0x08000a96                vApplicationTickHook
  .text.TIM3_IRQHandler
-                0x080029b0       0x40 ./main.o
-                0x080029b0                TIM3_IRQHandler
+                0x08000aa4       0x40 ./main.o
+                0x08000aa4                TIM3_IRQHandler
  .text.TIM2_IRQHandler
-                0x080029f0       0x28 ./main.o
-                0x080029f0                TIM2_IRQHandler
+                0x08000ae4       0x28 ./main.o
+                0x08000ae4                TIM2_IRQHandler
  .text.EXTI9_5_IRQHandler
-                0x08002a18       0x44 ./main.o
-                0x08002a18                EXTI9_5_IRQHandler
- .text.vApplicationMallocFailedHook
-                0x08002a5c       0x1c ./main.o
-                0x08002a5c                vApplicationMallocFailedHook
- .text.vApplicationIdleHook
-                0x08002a78        0xe ./main.o
-                0x08002a78                vApplicationIdleHook
+                0x08000b0c       0x44 ./main.o
+                0x08000b0c                EXTI9_5_IRQHandler
  .text.vApplicationStackOverflowHook
-                0x08002a86       0x20 ./main.o
-                0x08002a86                vApplicationStackOverflowHook
+                0x08000b50       0x20 ./main.o
+                0x08000b50                vApplicationStackOverflowHook
  .text.NMI_Handler
-                0x08002aa6        0xe ./stm32f4xx_it.o
-                0x08002aa6                NMI_Handler
+                0x08000b70        0xe ./stm32f4xx_it.o
+                0x08000b70                NMI_Handler
  .text.HardFault_Handler
-                0x08002ab4        0x6 ./stm32f4xx_it.o
-                0x08002ab4                HardFault_Handler
+                0x08000b7e        0x6 ./stm32f4xx_it.o
+                0x08000b7e                HardFault_Handler
  .text.MemManage_Handler
-                0x08002aba        0x6 ./stm32f4xx_it.o
-                0x08002aba                MemManage_Handler
+                0x08000b84        0x6 ./stm32f4xx_it.o
+                0x08000b84                MemManage_Handler
  .text.BusFault_Handler
-                0x08002ac0        0x6 ./stm32f4xx_it.o
-                0x08002ac0                BusFault_Handler
+                0x08000b8a        0x6 ./stm32f4xx_it.o
+                0x08000b8a                BusFault_Handler
  .text.UsageFault_Handler
-                0x08002ac6        0x6 ./stm32f4xx_it.o
-                0x08002ac6                UsageFault_Handler
+                0x08000b90        0x6 ./stm32f4xx_it.o
+                0x08000b90                UsageFault_Handler
  .text.DebugMon_Handler
-                0x08002acc        0xe ./stm32f4xx_it.o
-                0x08002acc                DebugMon_Handler
- *fill*         0x08002ada        0x2 
+                0x08000b96        0xe ./stm32f4xx_it.o
+                0x08000b96                DebugMon_Handler
+ .text.SpecialFunc2
+                0x08000ba4        0xc ./testF.o
+                0x08000ba4                SpecialFunc2
+ .text.testF    0x08000bb0       0x34 ./testF.o
+                0x08000bb0                testF
  .text.__libc_init_array
-                0x08002adc       0x48 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)
-                0x08002adc                __libc_init_array
- .text.memcpy   0x08002b24       0x1c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
-                0x08002b24                memcpy
- .text.memset   0x08002b40       0x10 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
-                0x08002b40                memset
+                0x08000be4       0x48 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)
+                0x08000be4                __libc_init_array
  *(.glue_7)
- .glue_7        0x08002b50        0x0 linker stubs
+ .glue_7        0x08000c2c        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08002b50        0x0 linker stubs
+ .glue_7t       0x08000c2c        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08002b50        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x08000c2c        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x08002b50        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crti.o
-                0x08002b50                _init
- .init          0x08002b54        0x8 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x08000c2c        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crti.o
+                0x08000c2c                _init
+ .init          0x08000c30        0x8 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x08002b5c        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crti.o
-                0x08002b5c                _fini
- .fini          0x08002b60        0x8 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
-                0x08002b68                . = ALIGN (0x4)
-                0x08002b68                _etext = .
+ .fini          0x08000c38        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crti.o
+                0x08000c38                _fini
+ .fini          0x08000c3c        0x8 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
+                0x08000c44                . = ALIGN (0x4)
+                0x08000c44                _etext = .
 
-.vfp11_veneer   0x08002b68        0x0
- .vfp11_veneer  0x08002b68        0x0 linker stubs
+.vfp11_veneer   0x08000c44        0x0
+ .vfp11_veneer  0x08000c44        0x0 linker stubs
 
-.v4_bx          0x08002b68        0x0
- .v4_bx         0x08002b68        0x0 linker stubs
+.v4_bx          0x08000c44        0x0
+ .v4_bx         0x08000c44        0x0 linker stubs
 
-.iplt           0x08002b68        0x0
- .iplt          0x08002b68        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x08000c44        0x0
+ .iplt          0x08000c44        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x08002b68       0x18
-                0x08002b68                . = ALIGN (0x4)
+.rel.dyn        0x08000c44        0x0
+ .rel.iplt      0x08000c44        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+
+.rodata         0x08000c44        0x0
+                0x08000c44                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08002b68        0x5 ./Source/tasks.o
- *fill*         0x08002b6d        0x3 
- .rodata        0x08002b70        0xd ./Source/timers.o
  *(.rodata*)
-                0x08002b80                . = ALIGN (0x4)
- *fill*         0x08002b7d        0x3 
-
-.rel.dyn        0x08002b80        0x0
- .rel.iplt      0x08002b80        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08000c44                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08002b80        0x0
-                0x08002b80                __exidx_start = .
+.ARM            0x08000c44        0x0
+                0x08000c44                __exidx_start = .
  *(.ARM.exidx*)
-                0x08002b80                __exidx_end = .
+                0x08000c44                __exidx_end = .
 
-.preinit_array  0x08002b80        0x0
-                0x08002b80                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08000c44        0x0
+                0x08000c44                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08002b80                PROVIDE (__preinit_array_end = .)
+                0x08000c44                PROVIDE (__preinit_array_end = .)
 
-.init_array     0x08002b80        0x4
-                0x08002b80                PROVIDE (__init_array_start = .)
+.init_array     0x08000c44        0x4
+                0x08000c44                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08002b80        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x08002b84                PROVIDE (__init_array_end = .)
+ .init_array    0x08000c44        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08000c48                PROVIDE (__init_array_end = .)
 
-.fini_array     0x08002b84        0x4
+.fini_array     0x08000c48        0x4
                 [!provide]                PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08002b84        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08000c48        0x4 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                PROVIDE (__fini_array_end = .)
-                0x08002b88                _sidata = LOADADDR (.data)
+                0x08000c4c                _sidata = LOADADDR (.data)
 
-.data           0x20000000        0xc load address 0x08002b88
+.data           0x20000000        0x0 load address 0x08000c4c
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
  *(.data*)
- .data.SystemCoreClock
-                0x20000000        0x4 ./startup/system_stm32f4xx.o
-                0x20000000                SystemCoreClock
- .data.xFreeBytesRemaining
-                0x20000004        0x4 ./Source/portable/MemMang/heap_2.o
- .data.uxCriticalNesting
-                0x20000008        0x4 ./Source/portable/GCC/ARM_CM4F/port.o
-                0x2000000c                . = ALIGN (0x4)
-                0x2000000c                _edata = .
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _edata = .
 
-.igot.plt       0x2000000c        0x0 load address 0x08002b94
- .igot.plt      0x2000000c        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x2000000c                . = ALIGN (0x4)
+.igot.plt       0x20000000        0x0 load address 0x08000c4c
+ .igot.plt      0x20000000        0x0 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x20000000                . = ALIGN (0x4)
 
-.bss            0x2000000c     0x51c4 load address 0x08002b94
-                0x2000000c                _sbss = .
-                0x2000000c                __bss_start__ = _sbss
+.bss            0x20000000       0xd0 load address 0x08000c4c
+                0x20000000                _sbss = .
+                0x20000000                __bss_start__ = _sbss
  *(.bss)
- .bss           0x2000000c       0x1c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .bss           0x20000000       0x1c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.bss*)
- .bss.ucHeap    0x20000028     0x5000 ./Source/portable/MemMang/heap_2.o
- .bss.xStart    0x20005028        0x8 ./Source/portable/MemMang/heap_2.o
- .bss.xEnd      0x20005030        0x8 ./Source/portable/MemMang/heap_2.o
- .bss.xHeapHasBeenInitialised.6541
-                0x20005038        0x4 ./Source/portable/MemMang/heap_2.o
  .bss.ucMaxSysCallPriority
-                0x2000503c        0x1 ./Source/portable/GCC/ARM_CM4F/port.o
- *fill*         0x2000503d        0x3 
+                0x2000001c        0x1 ./Source/portable/GCC/ARM_CM4F/port.o
+ *fill*         0x2000001d        0x3 
  .bss.ulMaxPRIGROUPValue
-                0x20005040        0x4 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x20000020        0x4 ./Source/portable/GCC/ARM_CM4F/port.o
  .bss.pxCurrentTCB
-                0x20005044        0x4 ./Source/tasks.o
-                0x20005044                pxCurrentTCB
+                0x20000024        0x4 ./Source/tasks.o
+                0x20000024                pxCurrentTCB
  .bss.pxReadyTasksLists
-                0x20005048       0x64 ./Source/tasks.o
- .bss.xDelayedTaskList1
-                0x200050ac       0x14 ./Source/tasks.o
- .bss.xDelayedTaskList2
-                0x200050c0       0x14 ./Source/tasks.o
+                0x20000028       0x64 ./Source/tasks.o
  .bss.pxDelayedTaskList
-                0x200050d4        0x4 ./Source/tasks.o
+                0x2000008c        0x4 ./Source/tasks.o
  .bss.pxOverflowDelayedTaskList
-                0x200050d8        0x4 ./Source/tasks.o
+                0x20000090        0x4 ./Source/tasks.o
  .bss.xPendingReadyList
-                0x200050dc       0x14 ./Source/tasks.o
- .bss.xTasksWaitingTermination
-                0x200050f0       0x14 ./Source/tasks.o
- .bss.uxDeletedTasksWaitingCleanUp
-                0x20005104        0x4 ./Source/tasks.o
- .bss.xSuspendedTaskList
-                0x20005108       0x14 ./Source/tasks.o
- .bss.uxCurrentNumberOfTasks
-                0x2000511c        0x4 ./Source/tasks.o
+                0x20000094       0x14 ./Source/tasks.o
  .bss.xTickCount
-                0x20005120        0x4 ./Source/tasks.o
+                0x200000a8        0x4 ./Source/tasks.o
  .bss.uxTopReadyPriority
-                0x20005124        0x4 ./Source/tasks.o
- .bss.xSchedulerRunning
-                0x20005128        0x4 ./Source/tasks.o
+                0x200000ac        0x4 ./Source/tasks.o
  .bss.uxPendedTicks
-                0x2000512c        0x4 ./Source/tasks.o
+                0x200000b0        0x4 ./Source/tasks.o
  .bss.xYieldPending
-                0x20005130        0x4 ./Source/tasks.o
+                0x200000b4        0x4 ./Source/tasks.o
  .bss.xNumOfOverflows
-                0x20005134        0x4 ./Source/tasks.o
- .bss.uxTaskNumber
-                0x20005138        0x4 ./Source/tasks.o
+                0x200000b8        0x4 ./Source/tasks.o
  .bss.xNextTaskUnblockTime
-                0x2000513c        0x4 ./Source/tasks.o
- .bss.xIdleTaskHandle
-                0x20005140        0x4 ./Source/tasks.o
+                0x200000bc        0x4 ./Source/tasks.o
  .bss.uxSchedulerSuspended
-                0x20005144        0x4 ./Source/tasks.o
- .bss.xActiveTimerList1
-                0x20005148       0x14 ./Source/timers.o
- .bss.xActiveTimerList2
-                0x2000515c       0x14 ./Source/timers.o
- .bss.pxCurrentTimerList
-                0x20005170        0x4 ./Source/timers.o
- .bss.pxOverflowTimerList
-                0x20005174        0x4 ./Source/timers.o
- .bss.xTimerQueue
-                0x20005178        0x4 ./Source/timers.o
- .bss.xTimerTaskHandle
-                0x2000517c        0x4 ./Source/timers.o
- .bss.xLastTime.6845
-                0x20005180        0x4 ./Source/timers.o
+                0x200000c0        0x4 ./Source/tasks.o
  .bss.ulFPUInterruptNesting
-                0x20005184        0x4 ./main.o
-                0x20005184                ulFPUInterruptNesting
+                0x200000c4        0x4 ./main.o
+                0x200000c4                ulFPUInterruptNesting
  .bss.ulMaxFPUInterruptNesting
-                0x20005188        0x4 ./main.o
-                0x20005188                ulMaxFPUInterruptNesting
+                0x200000c8        0x4 ./main.o
+                0x200000c8                ulMaxFPUInterruptNesting
  .bss.xTestSemaphore
-                0x2000518c        0x4 ./main.o
+                0x200000cc        0x4 ./main.o
  *(COMMON)
- COMMON         0x20005190       0x40 ./Source/queue.o
-                0x20005190                xQueueRegistry
-                0x200051d0                . = ALIGN (0x4)
-                0x200051d0                _ebss = .
-                0x200051d0                __bss_end__ = _ebss
+                0x200000d0                . = ALIGN (0x4)
+                0x200000d0                _ebss = .
+                0x200000d0                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200051d0     0x8400 load address 0x08002b94
-                0x200051d0                . = ALIGN (0x8)
+                0x200000d0     0x8400 load address 0x08000c4c
+                0x200000d0                . = ALIGN (0x8)
                 [!provide]                PROVIDE (end = .)
                 [!provide]                PROVIDE (_end = .)
-                0x200051d0                __heap_start = .
-                0x2000d1d0                . = (. + _Min_Heap_Size)
- *fill*         0x200051d0     0x8000 
-                0x2000d1d0                __heap_limit = .
-                0x2000d5d0                . = (. + _Min_Stack_Size)
- *fill*         0x2000d1d0      0x400 
-                0x2000d5d0                . = ALIGN (0x8)
+                0x200000d0                __heap_start = .
+                0x200080d0                . = (. + _Min_Heap_Size)
+ *fill*         0x200000d0     0x8000 
+                0x200080d0                __heap_limit = .
+                0x200084d0                . = (. + _Min_Stack_Size)
+ *fill*         0x200080d0      0x400 
+                0x200084d0                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -3638,143 +3608,119 @@ LOAD c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gc
  .ARM.attributes
                 0x00000073       0x34 ./startup/system_stm32f4xx.o
  .ARM.attributes
-                0x000000a7       0x34 ./Source/portable/MemMang/heap_2.o
+                0x000000a7       0x34 ./Source/portable/GCC/ARM_CM4F/port.o
  .ARM.attributes
-                0x000000db       0x34 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x000000db       0x34 ./Source/list.o
  .ARM.attributes
-                0x0000010f       0x34 ./Source/list.o
+                0x0000010f       0x34 ./Source/queue.o
  .ARM.attributes
-                0x00000143       0x34 ./Source/queue.o
+                0x00000143       0x34 ./Source/tasks.o
  .ARM.attributes
-                0x00000177       0x34 ./Source/tasks.o
+                0x00000177       0x34 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
  .ARM.attributes
-                0x000001ab       0x34 ./Source/timers.o
+                0x000001ab       0x34 ./main.o
  .ARM.attributes
-                0x000001df       0x34 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+                0x000001df       0x34 ./stm32f4xx_it.o
  .ARM.attributes
-                0x00000213       0x34 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+                0x00000213       0x34 ./testF.o
  .ARM.attributes
-                0x00000247       0x34 ./main.o
+                0x00000247       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x0000027b       0x34 ./stm32f4xx_it.o
- .ARM.attributes
-                0x000002af       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)
- .ARM.attributes
-                0x000002e3       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
- .ARM.attributes
-                0x00000317       0x34 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
- .ARM.attributes
-                0x0000034b       0x1e c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
+                0x0000027b       0x1e c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtn.o
 OUTPUT(FreeRTOSTest.elf elf32-littlearm)
 
-.debug_line     0x00000000     0x7525
+.debug_line     0x00000000     0x5d91
  .debug_line    0x00000000       0x83 ./startup/startup_stm32f401xe-gcc.o
- .debug_line    0x00000083      0x7d5 ./startup/system_stm32f4xx.o
- .debug_line    0x00000858      0x5cf ./Source/portable/MemMang/heap_2.o
- .debug_line    0x00000e27      0x70d ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_line    0x00001534      0x565 ./Source/list.o
- .debug_line    0x00001a99     0x1375 ./Source/queue.o
- .debug_line    0x00002e0e     0x19b6 ./Source/tasks.o
- .debug_line    0x000047c4      0xa80 ./Source/timers.o
- .debug_line    0x00005244      0x77b ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_line    0x000059bf      0x815 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_line    0x000061d4      0xc09 ./main.o
- .debug_line    0x00006ddd      0x748 ./stm32f4xx_it.o
+ .debug_line    0x00000083      0x80d ./startup/system_stm32f4xx.o
+ .debug_line    0x00000890      0x6c8 ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_line    0x00000f58      0x58f ./Source/list.o
+ .debug_line    0x000014e7     0x12a0 ./Source/queue.o
+ .debug_line    0x00002787     0x1969 ./Source/tasks.o
+ .debug_line    0x000040f0      0x84d ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_line    0x0000493d      0xc78 ./main.o
+ .debug_line    0x000055b5      0x780 ./stm32f4xx_it.o
+ .debug_line    0x00005d35       0x5c ./testF.o
 
-.debug_info     0x00000000     0x9110
+.debug_info     0x00000000     0x6958
  .debug_info    0x00000000       0x22 ./startup/startup_stm32f401xe-gcc.o
  .debug_info    0x00000022      0x623 ./startup/system_stm32f4xx.o
- .debug_info    0x00000645      0xbc1 ./Source/portable/MemMang/heap_2.o
- .debug_info    0x00001206      0x4f1 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_info    0x000016f7      0xb82 ./Source/list.o
- .debug_info    0x00002279     0x1f3f ./Source/queue.o
- .debug_info    0x000041b8     0x2797 ./Source/tasks.o
- .debug_info    0x0000694f     0x1501 ./Source/timers.o
- .debug_info    0x00007e50      0x596 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_info    0x000083e6      0x397 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_info    0x0000877d      0x80f ./main.o
- .debug_info    0x00008f8c      0x184 ./stm32f4xx_it.o
+ .debug_info    0x00000645      0x473 ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_info    0x00000ab8      0xb82 ./Source/list.o
+ .debug_info    0x0000163a     0x1e6f ./Source/queue.o
+ .debug_info    0x000034a9     0x2709 ./Source/tasks.o
+ .debug_info    0x00005bb2      0x397 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_info    0x00005f49      0x823 ./main.o
+ .debug_info    0x0000676c      0x184 ./stm32f4xx_it.o
+ .debug_info    0x000068f0       0x68 ./testF.o
 
-.debug_abbrev   0x00000000     0x1a44
+.debug_abbrev   0x00000000     0x134d
  .debug_abbrev  0x00000000       0x12 ./startup/startup_stm32f401xe-gcc.o
  .debug_abbrev  0x00000012      0x17b ./startup/system_stm32f4xx.o
- .debug_abbrev  0x0000018d      0x2b4 ./Source/portable/MemMang/heap_2.o
- .debug_abbrev  0x00000441      0x231 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_abbrev  0x00000672      0x235 ./Source/list.o
- .debug_abbrev  0x000008a7      0x3a0 ./Source/queue.o
- .debug_abbrev  0x00000c47      0x3ed ./Source/tasks.o
- .debug_abbrev  0x00001034      0x33b ./Source/timers.o
- .debug_abbrev  0x0000136f      0x199 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_abbrev  0x00001508      0x1ed ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_abbrev  0x000016f5      0x2cc ./main.o
- .debug_abbrev  0x000019c1       0x83 ./stm32f4xx_it.o
+ .debug_abbrev  0x0000018d      0x23c ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_abbrev  0x000003c9      0x235 ./Source/list.o
+ .debug_abbrev  0x000005fe      0x3a0 ./Source/queue.o
+ .debug_abbrev  0x0000099e      0x3ed ./Source/tasks.o
+ .debug_abbrev  0x00000d8b      0x1ed ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_abbrev  0x00000f78      0x2e4 ./main.o
+ .debug_abbrev  0x0000125c       0x83 ./stm32f4xx_it.o
+ .debug_abbrev  0x000012df       0x6e ./testF.o
 
-.debug_aranges  0x00000000      0x6d8
+.debug_aranges  0x00000000      0x5a0
  .debug_aranges
                 0x00000000       0x28 ./startup/startup_stm32f401xe-gcc.o
  .debug_aranges
                 0x00000028       0x30 ./startup/system_stm32f4xx.o
  .debug_aranges
-                0x00000058       0x40 ./Source/portable/MemMang/heap_2.o
+                0x00000058       0x88 ./Source/portable/GCC/ARM_CM4F/port.o
  .debug_aranges
-                0x00000098       0x80 ./Source/portable/GCC/ARM_CM4F/port.o
+                0x000000e0       0x40 ./Source/list.o
  .debug_aranges
-                0x00000118       0x40 ./Source/list.o
+                0x00000120      0x128 ./Source/queue.o
  .debug_aranges
-                0x00000158      0x130 ./Source/queue.o
+                0x00000248      0x1d8 ./Source/tasks.o
  .debug_aranges
-                0x00000288      0x1e8 ./Source/tasks.o
+                0x00000420       0x58 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
  .debug_aranges
-                0x00000470       0xd0 ./Source/timers.o
+                0x00000478       0x90 ./main.o
  .debug_aranges
-                0x00000540       0x40 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
+                0x00000508       0x70 ./stm32f4xx_it.o
  .debug_aranges
-                0x00000580       0x58 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_aranges
-                0x000005d8       0x90 ./main.o
- .debug_aranges
-                0x00000668       0x70 ./stm32f4xx_it.o
+                0x00000578       0x28 ./testF.o
 
-.debug_str      0x00000000    0x655ef
+.debug_str      0x00000000    0x64c48
  .debug_str     0x00000000       0x8f ./startup/startup_stm32f401xe-gcc.o
- .debug_str     0x0000008f    0x57c29 ./startup/system_stm32f4xx.o
-                              0x57e40 (size before relaxing)
- .debug_str     0x00057cb8     0x7079 ./Source/portable/MemMang/heap_2.o
-                               0xaea0 (size before relaxing)
- .debug_str     0x0005ed31      0x852 ./Source/portable/GCC/ARM_CM4F/port.o
-                               0x86d7 (size before relaxing)
- .debug_str     0x0005f583      0x110 ./Source/list.o
-                               0xa576 (size before relaxing)
- .debug_str     0x0005f693      0xfa1 ./Source/queue.o
-                               0xbc28 (size before relaxing)
- .debug_str     0x00060634     0x1c8e ./Source/tasks.o
-                               0xca65 (size before relaxing)
- .debug_str     0x000622c2      0x4f2 ./Source/timers.o
-                               0xc079 (size before relaxing)
- .debug_str     0x000627b4      0x217 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
-                              0x57e81 (size before relaxing)
- .debug_str     0x000629cb      0x1f9 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
-                              0x57e04 (size before relaxing)
- .debug_str     0x00062bc4     0x2970 ./main.o
-                              0x5f74d (size before relaxing)
- .debug_str     0x00065534       0xbb ./stm32f4xx_it.o
-                              0x57cf0 (size before relaxing)
+ .debug_str     0x0000008f    0x57c93 ./startup/system_stm32f4xx.o
+                              0x57e4e (size before relaxing)
+ .debug_str     0x00057d22     0x4890 ./Source/portable/GCC/ARM_CM4F/port.o
+                               0x86b4 (size before relaxing)
+ .debug_str     0x0005c5b2     0x2d61 ./Source/list.o
+                               0xa584 (size before relaxing)
+ .debug_str     0x0005f313      0xfb9 ./Source/queue.o
+                               0xbc05 (size before relaxing)
+ .debug_str     0x000602cc     0x1c57 ./Source/tasks.o
+                               0xca2a (size before relaxing)
+ .debug_str     0x00061f23      0x218 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+                              0x57e12 (size before relaxing)
+ .debug_str     0x0006213b     0x2a47 ./main.o
+                              0x5f772 (size before relaxing)
+ .debug_str     0x00064b82       0xbb ./stm32f4xx_it.o
+                              0x57cfe (size before relaxing)
+ .debug_str     0x00064c3d        0xb ./testF.o
+                               0x2e2f (size before relaxing)
 
-.debug_ranges   0x00000000      0x620
+.debug_ranges   0x00000000      0x508
  .debug_ranges  0x00000000       0x20 ./startup/startup_stm32f401xe-gcc.o
  .debug_ranges  0x00000020       0x20 ./startup/system_stm32f4xx.o
- .debug_ranges  0x00000040       0x30 ./Source/portable/MemMang/heap_2.o
- .debug_ranges  0x00000070       0x70 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_ranges  0x000000e0       0x30 ./Source/list.o
- .debug_ranges  0x00000110      0x120 ./Source/queue.o
- .debug_ranges  0x00000230      0x1d8 ./Source/tasks.o
- .debug_ranges  0x00000408       0xc0 ./Source/timers.o
- .debug_ranges  0x000004c8       0x30 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_ranges  0x000004f8       0x48 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_ranges  0x00000540       0x80 ./main.o
- .debug_ranges  0x000005c0       0x60 ./stm32f4xx_it.o
+ .debug_ranges  0x00000040       0x78 ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_ranges  0x000000b8       0x30 ./Source/list.o
+ .debug_ranges  0x000000e8      0x118 ./Source/queue.o
+ .debug_ranges  0x00000200      0x1c8 ./Source/tasks.o
+ .debug_ranges  0x000003c8       0x48 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_ranges  0x00000410       0x80 ./main.o
+ .debug_ranges  0x00000490       0x60 ./stm32f4xx_it.o
+ .debug_ranges  0x000004f0       0x18 ./testF.o
 
-.debug_macro    0x00000000    0x105ca
+.debug_macro    0x00000000     0xec73
  .debug_macro   0x00000000      0x1e9 ./startup/system_stm32f4xx.o
  .debug_macro   0x000001e9      0xa9c ./startup/system_stm32f4xx.o
  .debug_macro   0x00000c85       0x5d ./startup/system_stm32f4xx.o
@@ -3814,78 +3760,43 @@ OUTPUT(FreeRTOSTest.elf elf32-littlearm)
  .debug_macro   0x0000d98e       0x34 ./startup/system_stm32f4xx.o
  .debug_macro   0x0000d9c2       0x7f ./startup/system_stm32f4xx.o
  .debug_macro   0x0000da41       0x35 ./startup/system_stm32f4xx.o
- .debug_macro   0x0000da76      0x1a7 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dc1d       0x18 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dc35       0x58 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dc8d       0x94 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dd21       0x35 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dd56       0x34 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dd8a       0x16 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dda0      0x10e ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000deae       0x8d ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000df3b       0x57 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000df92       0x58 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000dfea       0x1f ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e009       0x43 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e04c       0x20 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e06c      0x18e ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e1fa      0x339 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e533       0x16 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e549       0x29 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e572      0x10c ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e67e      0x15a ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e7d8       0xe4 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e8bc       0x1c ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e8d8       0x26 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000e8fe      0x4cc ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000edca       0xb5 ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000ee7f       0xaa ./Source/portable/MemMang/heap_2.o
- .debug_macro   0x0000ef29      0x196 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_macro   0x0000f0bf      0x174 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_macro   0x0000f233      0x17a ./Source/list.o
- .debug_macro   0x0000f3ad      0x204 ./Source/queue.o
- .debug_macro   0x0000f5b1       0x16 ./Source/queue.o
- .debug_macro   0x0000f5c7       0x35 ./Source/queue.o
- .debug_macro   0x0000f5fc       0x80 ./Source/queue.o
- .debug_macro   0x0000f67c      0x267 ./Source/tasks.o
- .debug_macro   0x0000f8e3       0x10 ./Source/tasks.o
- .debug_macro   0x0000f8f3      0x1cf ./Source/timers.o
- .debug_macro   0x0000fac2       0x97 ./Source/timers.o
- .debug_macro   0x0000fb59      0x1d6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_macro   0x0000fd2f       0x79 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_macro   0x0000fda8      0x1d6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_macro   0x0000ff7e       0xa6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_macro   0x00010024      0x33b ./main.o
- .debug_macro   0x0001035f       0x86 ./main.o
- .debug_macro   0x000103e5      0x1d5 ./stm32f4xx_it.o
- .debug_macro   0x000105ba       0x10 ./stm32f4xx_it.o
+ .debug_macro   0x0000da76      0x196 ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_macro   0x0000dc0c      0x174 ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_macro   0x0000dd80      0x17a ./Source/list.o
+ .debug_macro   0x0000defa      0x204 ./Source/queue.o
+ .debug_macro   0x0000e0fe       0x16 ./Source/queue.o
+ .debug_macro   0x0000e114       0x35 ./Source/queue.o
+ .debug_macro   0x0000e149       0x80 ./Source/queue.o
+ .debug_macro   0x0000e1c9      0x267 ./Source/tasks.o
+ .debug_macro   0x0000e430       0x10 ./Source/tasks.o
+ .debug_macro   0x0000e440      0x1d6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_macro   0x0000e616       0xa6 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_macro   0x0000e6bc      0x33b ./main.o
+ .debug_macro   0x0000e9f7       0x86 ./main.o
+ .debug_macro   0x0000ea7d      0x1d5 ./stm32f4xx_it.o
+ .debug_macro   0x0000ec52       0x10 ./stm32f4xx_it.o
+ .debug_macro   0x0000ec62       0x11 ./testF.o
 
 .comment        0x00000000       0x79
  .comment       0x00000000       0x79 ./startup/system_stm32f4xx.o
                                  0x7a (size before relaxing)
- .comment       0x00000079       0x7a ./Source/portable/MemMang/heap_2.o
  .comment       0x00000079       0x7a ./Source/portable/GCC/ARM_CM4F/port.o
  .comment       0x00000079       0x7a ./Source/list.o
  .comment       0x00000079       0x7a ./Source/queue.o
  .comment       0x00000079       0x7a ./Source/tasks.o
- .comment       0x00000079       0x7a ./Source/timers.o
- .comment       0x00000079       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
  .comment       0x00000079       0x7a ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
  .comment       0x00000079       0x7a ./main.o
  .comment       0x00000079       0x7a ./stm32f4xx_it.o
+ .comment       0x00000079       0x7a ./testF.o
 
-.debug_frame    0x00000000     0x1a7c
+.debug_frame    0x00000000     0x1510
  .debug_frame   0x00000000       0x7c ./startup/system_stm32f4xx.o
- .debug_frame   0x0000007c       0xc0 ./Source/portable/MemMang/heap_2.o
- .debug_frame   0x0000013c      0x1a8 ./Source/portable/GCC/ARM_CM4F/port.o
- .debug_frame   0x000002e4       0xd8 ./Source/list.o
- .debug_frame   0x000003bc      0x530 ./Source/queue.o
- .debug_frame   0x000008ec      0x850 ./Source/tasks.o
- .debug_frame   0x0000113c      0x368 ./Source/timers.o
- .debug_frame   0x000014a4       0xd8 ./Libraries/STM32F4xx_StdPeriph_Driver/src/misc.o
- .debug_frame   0x0000157c      0x148 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
- .debug_frame   0x000016c4      0x1f4 ./main.o
- .debug_frame   0x000018b8      0x150 ./stm32f4xx_it.o
- .debug_frame   0x00001a08       0x2c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)
- .debug_frame   0x00001a34       0x28 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00001a5c       0x20 c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000007c      0x1bc ./Source/portable/GCC/ARM_CM4F/port.o
+ .debug_frame   0x00000238       0xd8 ./Source/list.o
+ .debug_frame   0x00000310      0x508 ./Source/queue.o
+ .debug_frame   0x00000818      0x804 ./Source/tasks.o
+ .debug_frame   0x0000101c      0x148 ./Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_frame   0x00001164      0x1e4 ./main.o
+ .debug_frame   0x00001348      0x150 ./stm32f4xx_it.o
+ .debug_frame   0x00001498       0x4c ./testF.o
+ .debug_frame   0x000014e4       0x2c c:/program files (x86)/gnu tools arm embedded/9 2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(lib_a-init.o)

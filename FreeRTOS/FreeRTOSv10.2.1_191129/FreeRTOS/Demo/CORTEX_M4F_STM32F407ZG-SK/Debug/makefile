@@ -14,7 +14,6 @@ RM := rm -rf
 -include Source/portable/GCC/ARM_CM4F/subdir.mk
 -include Source/subdir.mk
 -include Libraries/STM32F4xx_StdPeriph_Driver/src/subdir.mk
--include Flash\ Debug/Obj/subdir.mk
 -include Common/Minimal/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -63,7 +62,7 @@ all: FreeRTOSTest.elf secondary-outputs
 FreeRTOSTest.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "F:\SeggerRTOS\FreeRTOS\FreeRTOSv10.2.1_191129\FreeRTOS\Demo\CORTEX_M4F_STM32F407ZG-SK\STM32F401RETx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"FreeRTOSTest.map" --specs=nano.specs --specs=nosys.specs -o "FreeRTOSTest.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "F:\SeggerRTOS\cooperativeos\FreeRTOS\FreeRTOSv10.2.1_191129\FreeRTOS\Demo\CORTEX_M4F_STM32F407ZG-SK\STM32F401RETx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"FreeRTOSTest.map" --specs=nano.specs --specs=nosys.specs -o "FreeRTOSTest.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

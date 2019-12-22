@@ -265,12 +265,12 @@ int main(void)
 	tasks are only created if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to
 	0 (at the top of this file).  See the comments at the top of this file for
 	more information. */
-	//vStartLEDFlashTasks( mainFLASH_TASK_PRIORITY );
+	vStartLEDFlashTasks( mainFLASH_TASK_PRIORITY );
 
 	/* The following function will only create more tasks and timers if
 	mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to 0 (at the top of this
 	file).  See the comments at the top of this file for more information. */
-	//prvOptionallyCreateComprehensveTestApplication();
+	prvOptionallyCreateComprehensveTestApplication();
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();

@@ -23,7 +23,7 @@ public:
 
    static void AddThread(Thread* add);
    static void Init();
-   static void PendSV_Handler();
+   static void PendSV_Handler() __attribute((naked));
 
    static void SwitchThreads();
 

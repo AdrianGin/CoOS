@@ -53,9 +53,20 @@ void CoOS::Yield(void)
 {
    CoOS::RoundRobin::SwitchThreads();
    SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
+   __DSB();
+   __ISB();
+}
+
+void CoOS::InitProcessStack(void)
+{
+	CoOS_InitProcessStack();
 }
 
 
-
+void CoOS::StartOS()
+{
+	_nextTask = 0;
+	Yield();
+}
 
 

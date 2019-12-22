@@ -32,6 +32,7 @@ extern CoOS::Thread* pool[];
 void CoOS_InitProcessStack(void);
 void CoOS_Yield();
 
+
 void CoOS_ScheduleNextTask();
 
 void SVC_Handler_C(uint32_t* svc_args);
@@ -46,6 +47,11 @@ void ClearSignal(SignalFlags::Flags signal);
 
 //Applies to current thread
 void Yield();
+
+void InitProcessStack(void) __attribute((naked));
+
+void StartOS();
+
 }
 
 

@@ -31,7 +31,7 @@ void RoundRobin::Init()
    NVIC_SetPriority(PendSV_IRQn, 0xFF);
    NVIC_EnableIRQ(PendSV_IRQn);
    _currentTask = 0;
-   _nextTask = 1;
+   _nextTask = 0;
 }
 
 void RoundRobin::SwitchThreads(void)
@@ -39,13 +39,10 @@ void RoundRobin::SwitchThreads(void)
    ThreadID nextTask = kInvalidThread;
    ThreadID checkThread = _currentTask;
    do {
-
       checkThread++;
-
       if( checkThread >= count ) {
          checkThread = 0;
       }
-
 
       if( (pool[checkThread]->m_waitMask & pool[checkThread]->m_Flags.Get() ) == pool[checkThread]->m_waitMask ) {
          nextTask = checkThread;

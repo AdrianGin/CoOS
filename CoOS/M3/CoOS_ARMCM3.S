@@ -58,8 +58,14 @@ PendSV_Handler:
 	ldmia R1!, {R4-R11}
 	//Update PSP with next task.
 	msr psp, R1
+	isb
+
+
 
 ContextSwitch_Exit:
+
+	//mov lr, #0xFFFFFFFD
+
 	bx lr
 
 
@@ -92,22 +98,14 @@ SVC_Handler:
 CoOS_InitProcessStack:
 
 	//Reset MSP to init
-	mov r0, #0
-	ldr r0, [r0]
-	msr msp, r0
-
-	mov r7, r0
-	ldr r0, =Reset_Handler
-	push {r0}
-	push {r7}
-
-
-	add r7, sp, #0
+	//mov r0, #0
+	//ldr r0, [r0]
+	//msr msp, r0
 
 	ldr r0, =[_currentTask]
 	ldr r0, [r0]
 	ldr r2, =[pool]
-	//Get Next Stack Frame's SP
+	//Get Current Task Stack Frame's SP
 	ldr r1, [r2, r0 , LSL #2]
 	ldr r1, [r1]
 	msr psp, r1
@@ -115,14 +113,12 @@ CoOS_InitProcessStack:
 	//Set Thread to PSP
 	mrs r0, control
 	orr r0, r0, #2
-	msr control, r0
+	//msr control, r0
 
 	movs r1, #1
 	ldr r0, =[_isRunning]
 	strb r1, [r0]
 
-
-	isb
 	bx lr
 
 _SCB_ICSR: .word 0xE000ED00

@@ -83,26 +83,25 @@ void Task3(void)
    }
 }
 
-static volatile const CoOS::Thread::Context* ptr = (CoOS::Thread::Context*)0x200002e8;
 
 
 int main(void)
 {
-
    SCB->CCR |= SCB_CCR_STKALIGN_Msk;
    HAL_Init();
    SystemClock_Config();
 
    CoOS::RoundRobin::AddThread(&Thread0);
-   CoOS::RoundRobin::AddThread(&Thread1);
-   //CoOS::RoundRobin::AddThread(&Thread2);
- //  CoOS::RoundRobin::AddThread(&Thread3);
+   //CoOS::RoundRobin::AddThread(&Thread1);
+   CoOS::RoundRobin::AddThread(&Thread2);
+   CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();
    CoOS_InitProcessStack();
 
    while(1)
    {
+	   CoOS::Yield();
       //Task0();
       //CoOS::Tests_Signal();
    }

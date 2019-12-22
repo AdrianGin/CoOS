@@ -294,31 +294,31 @@ BaseType_t xPortStartScheduler( void )
 {
 	/* configMAX_SYSCALL_INTERRUPT_PRIORITY must not be set to 0.
 	See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html */
-	//configASSERT( configMAX_SYSCALL_INTERRUPT_PRIORITY );
+	configASSERT( configMAX_SYSCALL_INTERRUPT_PRIORITY );
 
 	/* This port can be used on all revisions of the Cortex-M7 core other than
 	the r0p1 parts.  r0p1 parts should use the port from the
 	/source/portable/GCC/ARM_CM7/r0p1 directory. */
-	//configASSERT( portCPUID != portCORTEX_M7_r0p1_ID );
-	//configASSERT( portCPUID != portCORTEX_M7_r0p0_ID );
+	configASSERT( portCPUID != portCORTEX_M7_r0p1_ID );
+	configASSERT( portCPUID != portCORTEX_M7_r0p0_ID );
 
 
 	/* Make PendSV and SysTick the lowest priority interrupts. */
-	//portNVIC_SYSPRI2_REG |= portNVIC_PENDSV_PRI;
-	//portNVIC_SYSPRI2_REG |= portNVIC_SYSTICK_PRI;
+	portNVIC_SYSPRI2_REG |= portNVIC_PENDSV_PRI;
+	portNVIC_SYSPRI2_REG |= portNVIC_SYSTICK_PRI;
 
 	/* Start the timer that generates the tick ISR.  Interrupts are disabled
 	here already. */
-	//vPortSetupTimerInterrupt();
+	vPortSetupTimerInterrupt();
 
 	/* Initialise the critical nesting count ready for the first task. */
-	//uxCriticalNesting = 0;
+	uxCriticalNesting = 0;
 
 	/* Ensure the VFP is enabled - it should be anyway. */
-	//vPortEnableVFP();
+	vPortEnableVFP();
 
 	/* Lazy save always. */
-	//*( portFPCCR ) |= portASPEN_AND_LSPEN_BITS;
+	*( portFPCCR ) |= portASPEN_AND_LSPEN_BITS;
 
 	/* Start the first task. */
 	prvPortStartFirstTask();

@@ -1,0 +1,15 @@
+"F:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\arm\bin\armproc.dll" 
+
+"F:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\arm\bin\armjlink2.dll" 
+
+"F:\SeggerRTOS\FreeRTOS\FreeRTOSv10.2.1_191129\FreeRTOS\Demo\CORTEX_M4F_STM32F407ZG-SK\Flash Debug\Exe\RTOSDemo.out" 
+
+--plugin="F:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\arm\bin\armbat.dll" 
+
+--device_macro="F:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\arm\config\debugger\ST\STM32F4xx.dmac" 
+
+--flash_loader="F:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\arm\config\flashloader\ST\FlashSTM32F401xC.board" 
+
+
+
+

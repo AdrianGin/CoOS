@@ -16,6 +16,8 @@
 .global CoOS_InitProcessStack
 .global CoOS_Yield
 
+.global Reset_Handler
+
 /**
  * PendSV_Handler Must:
  * Store R4-R11 of exception frame to current task stack
@@ -88,6 +90,20 @@ SVC_Handler:
 .thumb_func
 .type CoOS_InitProcessStack,%function
 CoOS_InitProcessStack:
+
+	//Reset MSP to init
+	mov r0, #0
+	ldr r0, [r0]
+	msr msp, r0
+
+	mov r7, r0
+	ldr r0, =Reset_Handler
+	push {r0}
+	push {r7}
+
+
+	add r7, sp, #0
+
 	ldr r0, =[_currentTask]
 	ldr r0, [r0]
 	ldr r2, =[pool]
@@ -96,7 +112,7 @@ CoOS_InitProcessStack:
 	ldr r1, [r1]
 	msr psp, r1
 
-	//Set Thread to r0PSP
+	//Set Thread to PSP
 	mrs r0, control
 	orr r0, r0, #2
 	msr control, r0

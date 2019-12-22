@@ -114,7 +114,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cp Debug/RTOSPlugin.dll "D:\Program Files (x86)\Segger\JLink_V644\GDBServer"</Command>
+      <Command>cp Debug/RTOSPlugin.dll "D:\Program Files (x86)\Segger\JLink_V652e\GDBServer"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

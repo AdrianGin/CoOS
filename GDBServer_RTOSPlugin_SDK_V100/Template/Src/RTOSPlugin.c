@@ -196,8 +196,9 @@ EXPORT int RTOS_Init(const GDB_API *pAPI, U32 core) {
 		|| (core == JLINK_CORE_CORTEX_M4)
 		|| (core == JLINK_CORE_CORTEX_M7)
 		) {
+
 		_OS.ThreadCount = 0;
-		_OS.StackingInfo.RegisterOffsets = _CortexM0StackOffsets;
+		_OS.StackingInfo.RegisterOffsets = _CortexM4StackOffsets;
 		_OS.StackingInfo.RegisterCount = 23;
 		_OS.IsActive = 0;
 		_pAPI->pfLogOutf(" << RTOS_Init\n");
@@ -266,7 +267,17 @@ static int _ReadStack(U32 threadid) {
 		}
 	}
 
-	_StackMem.Pointer = regVal - sizeof(Context);
+	if (threadid != _OS.CurrentThread) {
+		_StackMem.Pointer = regVal + 0x20;
+	}
+
+	Context* context = &_StackMem.Data;
+
+	if (context->xpsr & (1 << 9)) {
+		_StackMem.Pointer += 4;
+		_pAPI->pfLogOutf(">> _ReadStack :: Adjusting alignment\n");
+	}
+
 	_StackMem.ThreadID = threadid;
 	return retval;
 }
@@ -285,11 +296,15 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 		// load stack memory if necessary
 		//
 				//> XPSR
-		if (RegIndex > 0x16) {
+		if (RegIndex > 25) {
 			return -1;
 		}
 
-		_ReadStack(threadid);
+		if (_ReadStack(threadid))
+		{
+			_pAPI->pfLogOutf("<< RTOS_GetThreadReg :: _ReadStack failed\n");
+			return -1;
+		}
 		 
 		int offset = _OS.StackingInfo.RegisterOffsets[RegIndex].offset;
 		uint32_t regVal = 0;
@@ -298,6 +313,7 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 		{
 			for (j = 0; j < _OS.StackingInfo.RegisterOffsets[RegIndex].bits / 8; j++) {
 				if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -1) {
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, 0);
 					pHexRegVal += snprintf(pHexRegVal, 3, "%02x", 0);
 				}
 				else if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -2) {
@@ -307,8 +323,13 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 				else {
 					pHexRegVal += snprintf(pHexRegVal, 3, "%02x",
 						_StackMem.Data[_OS.StackingInfo.RegisterOffsets[RegIndex].offset + j]);
+
+					uint32_t* data = &_StackMem.Data[_OS.StackingInfo.RegisterOffsets[RegIndex].offset];
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, *data);
 				}
 			}
+
+
 
 
 
@@ -325,14 +346,20 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 	I32 j;
 	int retval;
 
+	static int lastThreadId = 0;
+
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Req=%d, Cur=%d\n", threadid, _OS.CurrentThread);
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Current = %d\n", _OS.CurrentThread);
 
-	if ( threadid == _OS.CurrentThread) {
+	if (threadid == _OS.CurrentThread) {
 		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, %d = %d\n", threadid, _OS.CurrentThread);
 		return -1; // Current thread or current execution returns CPU registers
 	}
 
+
+	if (_OS.pThreadDetails == 0) {
+		UpdateThreads();
+	}
 	//
 	// load stack memory if necessary
 	//
@@ -357,7 +384,6 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 			else {
 				pHexRegList += snprintf(pHexRegList, 3, "%02x",
 					_StackMem.Data[_OS.StackingInfo.RegisterOffsets[i].offset + j]);
-
 			}
 		}
 
@@ -367,8 +393,6 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 		} else if (_OS.StackingInfo.RegisterOffsets[i].offset == -2) {
 			_pAPI->pfLogOutf("Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[i].regName, _StackMem.Pointer);
 		} 
-
-
 	}
 
 	_pAPI->pfLogOutf("<< RTOS_GetThreadRegList\n");
@@ -379,11 +403,20 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 
 EXPORT int RTOS_SetThreadReg(char* pHexRegVal, U32 RegIndex, U32 threadid) {
 	_pAPI->pfLogOutf("<< RTOS_SetThreadReg\n");
+	if (threadid == _OS.CurrentThread) {
+		return -1; // Current thread or current execution return CPU registers
+	}
+
   return 0;
 }
 
 EXPORT int RTOS_SetThreadRegList(char *pHexRegList, U32 threadid) {
 	_pAPI->pfLogOutf("<< RTOS_SetThreadRegList\n");
+
+	if ( threadid == _OS.CurrentThread) {
+		return -1; // Current thread or current execution return CPU registers
+	}
+
   return 0;
 }
 
@@ -421,8 +454,8 @@ static void _AllocThreadlist(int count) {
 	_OS.uThreadDetails = count;
 }
 
-EXPORT int RTOS_UpdateThreads() {
 
+int UpdateThreads() {
 	U32  retval;
 	U32  tcb;
 	U32  TasksFound;
@@ -446,33 +479,23 @@ EXPORT int RTOS_UpdateThreads() {
 	_pAPI->pfLogOutf("Read current task at 0x%08X, value 0x%08X.\n", RTOS_Symbols[_currentTask].address, _OS.CurrentThread);
 
 	if (_OS.CurrentThread == 0) {
-		//
-		// Current thread is null, if either task scheduler has not been started yet or
-		// no task is currently executing. Show one dummy thread with the current execution.
-		//
 		_OS.pThreadDetails[0].threadid = 0x00000000;
-		/*_OS.pThreadDetails->sThreadState = NULL;
-		_OS.pThreadDetails->sThreadName = (char*)_pAPI->pfAlloc(sizeof(_TaskCurrentExecution));
-		_OS.pThreadDetails->prio = 0;
-		strncpy(_embOS.pThreadDetails->sThreadName, _TaskCurrentExecution, sizeof(_TaskCurrentExecution));*/
 		_OS.CurrentThread = 0x00000000;
 		TasksFound = 1;
 	}
 
 	//Get Thread Count
 	retval = _pAPI->pfReadU8(RTOS_Symbols[_isRunning].address, &_OS.IsActive);
-	if ( !_OS.IsActive ) {
-		return 0;
+	if (!_OS.IsActive) {
+		//return 0;
 	}
 
 	retval = _pAPI->pfReadU32(RTOS_Symbols[eThreadCount].address, &_OS.ThreadCount);
-
 	if (retval != 0) {
 		_pAPI->pfLogOutf("Error reading thread count.\n");
 		return retval;
 	}
 	_pAPI->pfLogOutf("RTOS_UpdateThreads:: Thread count, Addr 0x%x, %d.\n", RTOS_Symbols[eThreadCount].address, _OS.ThreadCount);
-
 
 	uint32_t poolAdr = RTOS_Symbols[pool].address;
 	_pAPI->pfLogOutf("RTOS_UpdateThreads:: Pool Addr 0x%0x.\n", RTOS_Symbols[pool].address);
@@ -480,11 +503,20 @@ EXPORT int RTOS_UpdateThreads() {
 	//Read in psp for each thread.
 	for (uint8_t i = 0; i < _OS.ThreadCount; i++) {
 		retval = _pAPI->pfReadU32(poolAdr, &_OS.pThreadDetails[i].psp);
+		if (retval != 0) {
+			_pAPI->pfLogOutf("Error reading thread PSP.\n");
+			return retval;
+		}
+
 		_OS.pThreadDetails[i].threadid = i;
 		_pAPI->pfLogOutf("RTOS_UpdateThreads:: Pool Addr 0x%0x, PSP[%i] = 0x%0x.\n", poolAdr, i, _OS.pThreadDetails[i].psp);
 		poolAdr += 4;
 	}
 
 
-  return 0;
+	return 0;
+}
+
+EXPORT int RTOS_UpdateThreads() {
+	return UpdateThreads();
 }

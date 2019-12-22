@@ -12,7 +12,7 @@
 
 namespace CoOS {
 
-uint32_t RoundRobin::count;
+uint32_t RoundRobin::count = 0;
 
 void RoundRobin::AddThread(Thread* add)
 {

@@ -69,6 +69,10 @@ void Task2(void)
    {
       i += 2;
       CoOS::Yield();
+
+      if(i == 9999 ) {
+    	  break;
+      }
    }
 }
 
@@ -97,6 +101,9 @@ int main(void)
    CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();
+
+
+   CoOS_InitMainStack();
    CoOS_InitProcessStack();
 
    while(1)

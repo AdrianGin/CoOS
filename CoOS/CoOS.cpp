@@ -63,6 +63,11 @@ void CoOS::InitProcessStack(void)
 }
 
 
+void CoOS::InitMainStack(void)
+{
+
+}
+
 void CoOS::StartOS()
 {
 	_nextTask = 0;

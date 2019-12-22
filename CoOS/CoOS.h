@@ -29,6 +29,7 @@ extern volatile uint32_t _nextTask;
 extern uint32_t _svc_exec_return;
 
 extern CoOS::Thread* pool[];
+void CoOS_InitMainStack(void);
 void CoOS_InitProcessStack(void);
 void CoOS_Yield();
 
@@ -49,6 +50,8 @@ void ClearSignal(SignalFlags::Flags signal);
 void Yield();
 
 void InitProcessStack(void) __attribute((naked));
+
+void InitMainStack(void) __attribute((naked));
 
 void StartOS();
 

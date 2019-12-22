@@ -13,10 +13,13 @@
 .global SVC_Handler
 .global SVC_Handler_C;
 
+.global CoOS_InitMainStack
 .global CoOS_InitProcessStack
 .global CoOS_Yield
 
 .global Reset_Handler
+
+.global _ZN4CoOS11ThreadStartEv
 
 /**
  * PendSV_Handler Must:
@@ -94,6 +97,25 @@ SVC_Handler:
 
 
 .thumb_func
+.type CoOS_InitMainStack,%function
+CoOS_InitMainStack:
+	//Reset MSP to init
+	ldr r0, =0xE000ED08 //r0 = VTOR Use the VTOR offset register to locate the stack.
+	ldr r0, [r0]		//r0 = *VTOR
+	ldr r0, [r0]		//r0 = *(e_stack) (stack init)
+
+	sub r0, #32		    //r0 = r0 - 32
+	msr msp, r0			//MSP = r0
+
+	ldr r1, =_ZN4CoOS11ThreadStartEv //r1 = &CoOS::ThreadStart
+	add r1, #2
+	str r1, [r0, #0x14]	// MSP.LR = &CoOS::ThreadStart
+	str r1, [r0, #0x18]   // MSP.Return Addr = &CoOS::ThreadStart
+
+	bx lr
+
+
+.thumb_func
 .type CoOS_InitProcessStack,%function
 CoOS_InitProcessStack:
 
@@ -113,7 +135,7 @@ CoOS_InitProcessStack:
 	//Set Thread to PSP
 	mrs r0, control
 	orr r0, r0, #2
-	//msr control, r0
+	msr control, r0
 
 	movs r1, #1
 	ldr r0, =[_isRunning]

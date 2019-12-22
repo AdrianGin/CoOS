@@ -16,6 +16,8 @@
 
 namespace CoOS {
 
+void ThreadStart();
+
 class Thread {
 
 public:

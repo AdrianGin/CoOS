@@ -11,7 +11,7 @@
 
 namespace CoOS {
 
-static void ThreadStart()
+void ThreadStart()
 {
 	while(1)
 	{

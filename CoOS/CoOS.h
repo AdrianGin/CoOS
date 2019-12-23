@@ -33,6 +33,8 @@ void CoOS_InitMainStack(void);
 void CoOS_InitProcessStack(void);
 void CoOS_Yield();
 
+void CoOS_InterruptHandler();
+
 
 void CoOS_ScheduleNextTask();
 

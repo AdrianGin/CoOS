@@ -69,10 +69,6 @@ void Task2(void)
    {
       i += 2;
       CoOS::Yield();
-
-      if(i == 9999 ) {
-    	  break;
-      }
    }
 }
 

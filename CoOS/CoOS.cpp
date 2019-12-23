@@ -16,6 +16,11 @@ volatile uint32_t _nextTask;
 volatile uint8_t  _isRunning = 0;
 CoOS::Thread* pool[NUM_THREADS];
 
+void CoOS_InterruptHandler(void)
+{
+	pool[_currentTask];
+	__NOP();
+}
 
 void SVC_Handler_C(uint32_t* svc_args)
 {

@@ -19,7 +19,7 @@
 
 .global Reset_Handler
 
-.global _ZN4CoOS11ThreadStartEv
+.global CoOS_InterruptHandler
 
 /**
  * PendSV_Handler Must:
@@ -107,7 +107,7 @@ CoOS_InitMainStack:
 	sub r0, #32		    //r0 = r0 - 32
 	msr msp, r0			//MSP = r0
 
-	ldr r1, =_ZN4CoOS11ThreadStartEv //r1 = &CoOS::ThreadStart
+	ldr r1, =CoOS_InterruptHandler //r1 = &CoOS::ThreadStart
 	add r1, #2
 	str r1, [r0, #0x14]	// MSP.LR = &CoOS::ThreadStart
 	str r1, [r0, #0x18]   // MSP.Return Addr = &CoOS::ThreadStart

@@ -55,10 +55,12 @@ PendSV_Handler:
 	ldr R1, [R2, R0 , LSL #2]
 	ldr R1, [R1]
 
-	//Update current task
-	str R0, [R3]
-
+	//Unstack onto Registers
 	ldmia R1!, {R4-R11}
+
+	//Update current task
+	str R0, [R3] //_currentTask = _nextTask
+
 	//Update PSP with next task.
 	msr psp, R1
 	isb

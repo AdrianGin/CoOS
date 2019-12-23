@@ -24,10 +24,10 @@ void Task1(void);
 void Task2(void);
 void Task3(void);
 
-CoOS::Thread Thread0( (uint32_t)&Task0, 256, 0, true);
-CoOS::Thread Thread1( (uint32_t)&Task1, 256, 0);
-CoOS::Thread Thread2( (uint32_t)&Task2, 256, 0);
-CoOS::Thread Thread3( (uint32_t)&Task3, 256, 0);
+CoOS::Thread Thread0( (uint32_t)&Task0, 256, 0, 0);
+CoOS::Thread Thread1( (uint32_t)&Task1, 256, 0, 1);
+CoOS::Thread Thread2( (uint32_t)&Task2, 256, 0, 2);
+CoOS::Thread Thread3( (uint32_t)&Task3, 256, 0, 3);
 
 
 
@@ -92,8 +92,8 @@ int main(void)
    SystemClock_Config();
 
    CoOS::RoundRobin::AddThread(&Thread0);
-   //CoOS::RoundRobin::AddThread(&Thread1);
-   //CoOS::RoundRobin::AddThread(&Thread2);
+   CoOS::RoundRobin::AddThread(&Thread1);
+   CoOS::RoundRobin::AddThread(&Thread2);
    CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();

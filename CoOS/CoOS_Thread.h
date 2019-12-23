@@ -27,29 +27,26 @@ public:
    static const uint32_t EXEC_RETURN_PSP = 0xFFFFFFFD;
 
    typedef struct {
-      uint32_t r11;
-      uint32_t r10;
-      uint32_t r9;
-      uint32_t r8;
-      uint32_t r7;
-      uint32_t r6;
-      uint32_t r5;
-      uint32_t r4;
-      uint32_t r0;
-      uint32_t r1;
-      uint32_t r2;
-      uint32_t r3;
-      uint32_t r12;
-      void* lr;
-      void* pc;
-      uint32_t xpsr;
+	uint32_t r4;
+	uint32_t r5;
+	uint32_t r6;
+	uint32_t r7;
+	uint32_t r8;
+	uint32_t r9;
+	uint32_t r10;
+	uint32_t r11;
+	uint32_t r0;
+	uint32_t r1;
+	uint32_t r2;
+	uint32_t r3;
+	uint32_t r12;
+	void* lr;
+	void* pc;
+	uint32_t xpsr;
    } Context;
 
-   typedef void (*FnPtr)(void);
 
-
-
-   Thread(uint32_t start, uint32_t stackSize, SignalFlags::Flags initialWait, bool isMaster = false);
+   Thread(uint32_t start, uint32_t stackSize, SignalFlags::Flags initialWait, uint8_t taskId);
 
    inline void WaitForSignal(SignalFlags::Flags mask)
    {

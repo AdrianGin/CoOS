@@ -197,9 +197,10 @@ EXPORT int RTOS_Init(const GDB_API *pAPI, U32 core) {
 		|| (core == JLINK_CORE_CORTEX_M7)
 		) {
 
+		_OS.CurrentThread = 0;
 		_OS.ThreadCount = 0;
 		_OS.StackingInfo.RegisterOffsets = _CortexM4StackOffsets;
-		_OS.StackingInfo.RegisterCount = 23;
+		_OS.StackingInfo.RegisterCount = 17;
 		_OS.IsActive = 0;
 		_pAPI->pfLogOutf(" << RTOS_Init\n");
 
@@ -222,18 +223,18 @@ EXPORT U32 RTOS_GetNumThreads() {
 }
 
 EXPORT U32 RTOS_GetCurrentThreadId() {
-  _pAPI->pfLogOutf("RTOS_GetCurrentThreadId %d\n", _OS.CurrentThread);
-  return _OS.pThreadDetails[_OS.CurrentThread].psp;
+  _pAPI->pfLogOutf("RTOS_GetCurrentThreadId 0x%x\n", _OS.CurrentThread);
+  return _OS.CurrentThread;
 }
 
 EXPORT U32 RTOS_GetThreadId(U32 n) {
 	_pAPI->pfLogOutf("RTOS_GetThreadId %d\n", n);
-  return _OS.pThreadDetails[n].psp;
+  return _OS.pThreadDetails[n].threadid;
 }
 
 
 EXPORT int RTOS_GetThreadDisplay(char *pDisplay, U32 threadid) {
-   snprintf(pDisplay, 256, "CoOS Thread %d", threadid);
+   snprintf(pDisplay, 256, "CoOS Thread 0x%x", threadid);
    return strlen(pDisplay);
 }
 
@@ -249,11 +250,14 @@ static int _ReadStack(U32 threadid) {
 	uint32_t regVal = 0;
 	U32 idx;
 	for (idx = 0; idx < _OS.ThreadCount; idx++) {
-		if (_OS.pThreadDetails[idx].psp == threadid) {
+		if (_OS.pThreadDetails[idx].threadid == threadid) {
 			break;
 		}
 	}
-
+	if (idx == _OS.ThreadCount) {
+		_pAPI->pfLogOutf("Task not found.\n");
+		return -2;
+	}
 
 
 	_pAPI->pfLogOutf(">> _ReadStack :: psp[%d]=0x%x\n", idx, _OS.pThreadDetails[idx].psp);
@@ -276,7 +280,10 @@ static int _ReadStack(U32 threadid) {
 	}
 
 	if (threadid != _OS.CurrentThread) {
-		_StackMem.Pointer = regVal + 0x20;
+		_StackMem.Pointer = regVal + 0x40;
+	}
+	else {
+		//_StackMem.Pointer = regVal + 0x20;
 	}
 
 	Context* context = &_StackMem.Data;
@@ -293,12 +300,12 @@ static int _ReadStack(U32 threadid) {
 EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 
 	U32 retval;
-	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Thread[%d] Reg[%d]\n", threadid, RegIndex);
-	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Current = %d\n", _OS.CurrentThread);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Thread[0x%x] Reg[0x%x]\n", threadid, RegIndex);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Current = 0x%x\n", _OS.CurrentThread);
 
-	return -1;
+	if ( threadid == _OS.CurrentThread || _OS.CurrentThread <= 1) {
 
-	if ( threadid == _OS.CurrentThread) {
+		_pAPI->pfLogOutf("<< RTOS_GetThreadReg :: Return Direct CPU\n");
 		return -1; // Current thread or current execution returns CPU registers
 	}
 	else {
@@ -309,17 +316,18 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 		if (RegIndex > 25) {
 			return -1;
 		}
-
-		if (_ReadStack(threadid))
-		{
-			_pAPI->pfLogOutf("<< RTOS_GetThreadReg :: _ReadStack failed\n");
-			return -1;
+		if (_StackMem.ThreadID != threadid) {
+			if (_ReadStack(threadid))
+			{
+				_pAPI->pfLogOutf("<< RTOS_GetThreadReg :: _ReadStack failed\n");
+				return -1;
+			}
 		}
 		 
 		int offset = _OS.StackingInfo.RegisterOffsets[RegIndex].offset;
 		uint32_t regVal = 0;
 		I32 j;
-
+		if (RegIndex > 0x16 )
 		{
 			for (j = 0; j < _OS.StackingInfo.RegisterOffsets[RegIndex].bits / 8; j++) {
 				if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -1) {
@@ -338,11 +346,6 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%02x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, *data);
 				}
 			}
-
-
-
-
-
 			return 0;
 		}
 	}
@@ -358,13 +361,11 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 
 	static int lastThreadId = 0;
 
-	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Req=%d, Cur=%d\n", threadid, _OS.CurrentThread);
-	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Current = %d\n", _OS.CurrentThread);
+	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Req=0x%x, Cur=0x%x\n", threadid, _OS.CurrentThread);
 
-	return -1;
 
-	if (threadid == _OS.CurrentThread) {
-		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, %d = %d\n", threadid, _OS.CurrentThread);
+	if (threadid == 0 || threadid == _OS.CurrentThread) {
+		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, 0x%x = 0x%x\n", threadid, _OS.CurrentThread);
 		return -1; // Current thread or current execution returns CPU registers
 	}
 
@@ -374,7 +375,7 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 	//
 	// load stack memory if necessary
 	//
-	//if (_StackMem.ThreadID != threadid) 
+	if (_StackMem.ThreadID != threadid) 
 	{
 		retval = _ReadStack(threadid);
 		if (retval != 0) {
@@ -476,28 +477,31 @@ int UpdateThreads() {
 // Free previous thread details
 //
 	_FreeThreadlist();
-	//_StackMem.ThreadID = 0;
+	_StackMem.ThreadID = 0;
 	_AllocThreadlist(10);
 
 	//
 	// Read the current thread
 	//
-	retval = _pAPI->pfReadU32(RTOS_Symbols[_currentTask].address, &_OS.CurrentThread);
+	uint32_t currentTaskIdx;
+	retval = _pAPI->pfReadU32(RTOS_Symbols[_currentTask].address, &currentTaskIdx);
+	_OS.CurrentThread = RTOS_Symbols[pool].address + (currentTaskIdx * 4);
 	if (retval != 0) {
 		_pAPI->pfLogOutf("Error reading current task.\n");
 		return retval;
 	}
-	_pAPI->pfLogOutf("Read current task at 0x%08X, value 0x%08X.\n", RTOS_Symbols[_currentTask].address, _OS.CurrentThread);
 
-	if (_OS.CurrentThread == 0) {
-		_OS.pThreadDetails[0].threadid = 0x00000000;
-		_OS.CurrentThread = 0x00000000;
-		TasksFound = 1;
-	}
+	_pAPI->pfLogOutf("UpdateThreads:: Read current task (%d), value 0x%08X.\n", currentTaskIdx, _OS.CurrentThread);
 
 	//Get Thread Count
 	retval = _pAPI->pfReadU8(RTOS_Symbols[_isRunning].address, &_OS.IsActive);
 	if (!_OS.IsActive) {
+
+		_OS.pThreadDetails[0].threadid = 0x00000001;
+		_OS.CurrentThread = 0x00000001;
+		_OS.ThreadCount = 1;
+
+		_pAPI->pfLogOutf("UpdateThreads:: OS Not Active\n");
 		return 0;
 	}
 
@@ -519,7 +523,7 @@ int UpdateThreads() {
 			return retval;
 		}
 
-		_OS.pThreadDetails[i].threadid = i;
+		_OS.pThreadDetails[i].threadid = poolAdr;
 		_pAPI->pfLogOutf("RTOS_UpdateThreads:: Pool Addr 0x%0x, PSP[%i] = 0x%0x.\n", poolAdr, i, _OS.pThreadDetails[i].psp);
 		poolAdr += 4;
 	}

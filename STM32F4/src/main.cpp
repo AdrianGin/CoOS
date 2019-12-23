@@ -93,7 +93,7 @@ int main(void)
 
    CoOS::RoundRobin::AddThread(&Thread0);
    //CoOS::RoundRobin::AddThread(&Thread1);
-   CoOS::RoundRobin::AddThread(&Thread2);
+   //CoOS::RoundRobin::AddThread(&Thread2);
    CoOS::RoundRobin::AddThread(&Thread3);
 
    CoOS::RoundRobin::Init();
@@ -104,8 +104,8 @@ int main(void)
 
    while(1)
    {
-	   CoOS::Yield();
-      //Task0();
+	   //CoOS::Yield();
+      Task0();
       //CoOS::Tests_Signal();
    }
 

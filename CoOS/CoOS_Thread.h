@@ -61,7 +61,7 @@ public:
    SignalFlags m_Flags;
    SignalFlags::Flags m_waitMask;
 
-   const Context** const m_stackFrame; //Only valid when task is suspended.
+  // const Context** const m_stackFrame; //Only valid when task is suspended.
 
 
 };

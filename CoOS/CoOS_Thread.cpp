@@ -22,7 +22,8 @@ void ThreadStart()
 const uint32_t initVal = 0xA5A5A5A5;
 
 Thread::Thread(uint32_t start, uint32_t stackSize, SignalFlags::Flags initialWait, bool isMaster)
-: m_waitMask(initialWait) , m_stackFrame( (const Context**)&m_psp )  {
+: m_waitMask(initialWait) //, m_stackFrame( (const Context**)&m_psp )
+{
    m_stack = (uint32_t*)new (std::nothrow) uint8_t[stackSize];
 
    memset(m_stack, 0, stackSize);

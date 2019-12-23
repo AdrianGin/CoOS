@@ -223,12 +223,12 @@ EXPORT U32 RTOS_GetNumThreads() {
 
 EXPORT U32 RTOS_GetCurrentThreadId() {
   _pAPI->pfLogOutf("RTOS_GetCurrentThreadId %d\n", _OS.CurrentThread);
-  return _OS.CurrentThread;
+  return _OS.pThreadDetails[_OS.CurrentThread].psp;
 }
 
 EXPORT U32 RTOS_GetThreadId(U32 n) {
 	_pAPI->pfLogOutf("RTOS_GetThreadId %d\n", n);
-  return n;
+  return _OS.pThreadDetails[n].psp;
 }
 
 
@@ -247,17 +247,25 @@ EXPORT int RTOS_GetThreadDisplay(char *pDisplay, U32 threadid) {
 */
 static int _ReadStack(U32 threadid) {
 	uint32_t regVal = 0;
+	U32 idx;
+	for (idx = 0; idx < _OS.ThreadCount; idx++) {
+		if (_OS.pThreadDetails[idx].psp == threadid) {
+			break;
+		}
+	}
 
-	_pAPI->pfLogOutf(">> _ReadStack :: psp[%d]=0x%x\n", threadid, _OS.pThreadDetails[threadid].psp);
 
-	U32 retval = _pAPI->pfReadU32(_OS.pThreadDetails[threadid].psp, &regVal);
+
+	_pAPI->pfLogOutf(">> _ReadStack :: psp[%d]=0x%x\n", idx, _OS.pThreadDetails[idx].psp);
+
+	U32 retval = _pAPI->pfReadU32(_OS.pThreadDetails[idx].psp, &regVal);
 	if (retval != 0) {
 		_pAPI->pfLogOutf("Error reading stack frame from OS.\n");
 		return retval;
 	}
 
 	_StackMem.Pointer = regVal;
-	_pAPI->pfLogOutf(">> _ReadStack :: StackFrame[%d]=0x%x\n", threadid, _StackMem.Pointer);
+	_pAPI->pfLogOutf(">> _ReadStack :: StackFrame[%d]=0x%x\n", idx, _StackMem.Pointer);
 
 	for (uint8_t i = 0; i < sizeof(Context); i++) {
 		retval = _pAPI->pfReadU8(_StackMem.Pointer + i, (char*)&_StackMem.Data[i]);
@@ -288,6 +296,8 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Thread[%d] Reg[%d]\n", threadid, RegIndex);
 	_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: Current = %d\n", _OS.CurrentThread);
 
+	return -1;
+
 	if ( threadid == _OS.CurrentThread) {
 		return -1; // Current thread or current execution returns CPU registers
 	}
@@ -313,11 +323,11 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 		{
 			for (j = 0; j < _OS.StackingInfo.RegisterOffsets[RegIndex].bits / 8; j++) {
 				if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -1) {
-					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, 0);
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%02x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, 0);
 					pHexRegVal += snprintf(pHexRegVal, 3, "%02x", 0);
 				}
 				else if (_OS.StackingInfo.RegisterOffsets[RegIndex].offset == -2) {
-					_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: SP = 0x%08x\n", _StackMem.Pointer + 32);
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg :: SP = 0x%02x\n", _StackMem.Pointer + 32);
 					pHexRegVal += snprintf(pHexRegVal, 3, "%02x", ((U8 *)&_StackMem.Pointer + 32) [j]);
 				}
 				else {
@@ -325,7 +335,7 @@ EXPORT int RTOS_GetThreadReg(char *pHexRegVal, U32 RegIndex, U32 threadid) {
 						_StackMem.Data[_OS.StackingInfo.RegisterOffsets[RegIndex].offset + j]);
 
 					uint32_t* data = &_StackMem.Data[_OS.StackingInfo.RegisterOffsets[RegIndex].offset];
-					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%08x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, *data);
+					_pAPI->pfLogOutf(">> RTOS_GetThreadReg Reg[%s] = 0x%02x\n", _OS.StackingInfo.RegisterOffsets[RegIndex].regName, *data);
 				}
 			}
 
@@ -351,11 +361,12 @@ EXPORT int RTOS_GetThreadRegList(char *pHexRegList, U32 threadid) {
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Req=%d, Cur=%d\n", threadid, _OS.CurrentThread);
 	_pAPI->pfLogOutf(">> RTOS_GetThreadRegList :: Current = %d\n", _OS.CurrentThread);
 
+	return -1;
+
 	if (threadid == _OS.CurrentThread) {
 		_pAPI->pfLogOutf("<< threadid == _OS.CurrentThread, %d = %d\n", threadid, _OS.CurrentThread);
 		return -1; // Current thread or current execution returns CPU registers
 	}
-
 
 	if (_OS.pThreadDetails == 0) {
 		UpdateThreads();
@@ -487,7 +498,7 @@ int UpdateThreads() {
 	//Get Thread Count
 	retval = _pAPI->pfReadU8(RTOS_Symbols[_isRunning].address, &_OS.IsActive);
 	if (!_OS.IsActive) {
-		//return 0;
+		return 0;
 	}
 
 	retval = _pAPI->pfReadU32(RTOS_Symbols[eThreadCount].address, &_OS.ThreadCount);
